@@ -34,6 +34,8 @@ public class SetCurrentSemesterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.setSemester(sem);
+        model.addToHistory();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, sem));
     }
 

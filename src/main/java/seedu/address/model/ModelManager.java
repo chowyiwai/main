@@ -241,4 +241,30 @@ public class ModelManager implements Model {
         // this.modulePlanner.getActiveStudyPlan().blockSemester(semester);
     }
 
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndoModulePlanner() {
+        return modulePlanner.canUndo();
+    }
+
+    @Override
+    public boolean canRedoModulePlanner() {
+        return modulePlanner.canRedo();
+    }
+
+    @Override
+    public void undoModulePlanner() {
+        modulePlanner.undo();
+    }
+
+    @Override
+    public void redoModulePlanner() {
+        modulePlanner.redo();
+    }
+
+    @Override
+    public void addToHistory() {
+        modulePlanner.commit();
+    }
 }

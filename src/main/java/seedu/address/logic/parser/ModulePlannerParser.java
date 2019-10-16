@@ -11,7 +11,9 @@ import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
 import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
+import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.CreateTagCommand;
 import seedu.address.logic.commands.datamanagement.FindCommand;
 import seedu.address.logic.commands.datamanagement.TagModuleCommand;
@@ -96,6 +98,15 @@ public class ModulePlannerParser {
 
         case TagModuleCommand.COMMAND_WORD:
             return new TagModuleCommandParser().parse(arguments);
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
