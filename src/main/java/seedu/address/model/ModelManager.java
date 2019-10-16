@@ -47,14 +47,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -82,13 +82,13 @@ public class ModelManager implements Model {
     //=========== ModulePlanner ================================================================================
 
     @Override
-    public void setModulePlanner(ReadOnlyModulePlanner modulePlanner) {
-        this.modulePlanner.resetData(modulePlanner);
+    public ReadOnlyModulePlanner getModulePlanner() {
+        return modulePlanner;
     }
 
     @Override
-    public ReadOnlyModulePlanner getModulePlanner() {
-        return modulePlanner;
+    public void setModulePlanner(ReadOnlyModulePlanner modulePlanner) {
+        this.modulePlanner.resetData(modulePlanner);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class ModelManager implements Model {
     @Override
     public void addStudyPlan(StudyPlan studyPlan) {
         modulePlanner.addStudyPlan(studyPlan);
-        updateFilteredStudyPlanList(PREDICATE_SHOW_ALL_STUDYPLANS);
+        updateFilteredStudyPlanList(PREDICATE_SHOW_ALL_STUDY_PLANS);
     }
 
     @Override
@@ -199,11 +199,13 @@ public class ModelManager implements Model {
     @Override
     public void addModule(String moduleCode, SemesterName semesterName) {
         this.getActiveStudyPlan().addModuleToSemester(new ModuleCode(moduleCode), semesterName);
+        updateFilteredStudyPlanList(PREDICATE_SHOW_ALL_STUDY_PLANS);
     }
 
     @Override
     public void removeModule(String moduleCode, SemesterName semesterName) {
         this.getSemester(semesterName).removeModule(moduleCode);
+        updateFilteredStudyPlanList(PREDICATE_SHOW_ALL_STUDY_PLANS);
     }
 
     @Override
@@ -256,11 +258,13 @@ public class ModelManager implements Model {
     @Override
     public void undoModulePlanner() {
         modulePlanner.undo();
+        updateFilteredStudyPlanList(PREDICATE_SHOW_ALL_STUDY_PLANS);
     }
 
     @Override
     public void redoModulePlanner() {
         modulePlanner.redo();
+        updateFilteredStudyPlanList(PREDICATE_SHOW_ALL_STUDY_PLANS);
     }
 
     @Override
