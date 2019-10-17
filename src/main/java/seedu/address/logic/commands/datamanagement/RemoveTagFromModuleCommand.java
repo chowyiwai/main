@@ -15,7 +15,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.tag.UserTag;
 
 /**
  * Removes a {@code Tag} from a {@code Module}.
@@ -44,7 +43,7 @@ public class RemoveTagFromModuleCommand extends Command {
      *
      * @param tagName    The name of the tag.
      *                   =======
-     *                   Creates an {@code RemoveTagCommand} to move a tag with the given name from the specified module.
+     *                   Creates an {@code RemoveTagCommand} to move a tag with the given name from the module.
      * @param tagName    The name of the tag.
      *                   >>>>>>> master:src/main/java/seedu/address/logic/commands/datamanagement/RemoveTagCommand.java
      * @param moduleCode The module code of the module from which the tag is to be deleted.
