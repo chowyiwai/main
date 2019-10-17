@@ -8,13 +8,12 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.cli.AddModuleCommand;
-import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
-import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
+import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.CreateTagCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
-import seedu.address.logic.commands.datamanagement.FindCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
 import seedu.address.logic.commands.datamanagement.TagModuleCommand;
@@ -26,13 +25,10 @@ import seedu.address.logic.commands.storage.DeleteCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
 import seedu.address.logic.parser.cli.AddModuleParser;
-import seedu.address.logic.parser.cli.BlockCurrentSemesterParser;
 import seedu.address.logic.parser.cli.DeleteModuleFromSemesterParser;
-import seedu.address.logic.parser.cli.NameUeFromSemesterParser;
 import seedu.address.logic.parser.cli.SetCurrentSemesterParser;
 import seedu.address.logic.parser.datamanagement.CreateTagCommandParser;
 import seedu.address.logic.parser.datamanagement.DeleteTagCommandParser;
-import seedu.address.logic.parser.datamanagement.FindCommandParser;
 import seedu.address.logic.parser.datamanagement.RemoveTagFromAllCommandParser;
 import seedu.address.logic.parser.datamanagement.RemoveTagFromModuleCommandParser;
 import seedu.address.logic.parser.datamanagement.TagModuleCommandParser;
@@ -74,20 +70,20 @@ public class ModulePlannerParser {
         case AddModuleCommand.COMMAND_WORD:
             return new AddModuleParser().parse(arguments);
 
-        case BlockCurrentSemesterCommand.COMMAND_WORD:
-            return new BlockCurrentSemesterParser().parse(arguments);
+        // case BlockCurrentSemesterCommand.COMMAND_WORD:
+        // return new BlockCurrentSemesterParser().parse(arguments);
 
         case DeleteModuleCommand.COMMAND_WORD:
             return new DeleteModuleFromSemesterParser().parse(arguments);
 
-        case NameUeFromSemesterCommand.COMMAND_WORD:
-            return new NameUeFromSemesterParser().parse(arguments);
+        // case NameUeFromSemesterCommand.COMMAND_WORD:
+        // return new NameUeFromSemesterParser().parse(arguments);
 
         case SetCurrentSemesterCommand.COMMAND_WORD:
             return new SetCurrentSemesterParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        // case FindCommand.COMMAND_WORD:
+        // return new FindCommandParser().parse(arguments);
 
         case CheckCommand.COMMAND_WORD:
             return new CheckCommandParser().parse(arguments);
@@ -121,6 +117,15 @@ public class ModulePlannerParser {
 
         case RemoveTagFromAllCommand.COMMAND_WORD:
             return new RemoveTagFromAllCommandParser().parse(arguments);
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -145,6 +145,7 @@ public class Module implements Cloneable {
     /**
      * This method verifies previous semester codes against the prerequisite tree, and updates its
      * {@code prereqsSatisfied} property accordingly.
+     *
      * @param prevSemCodes Codes of modules taken in previous semesters
      */
     public void verify(List<String> prevSemCodes) {
@@ -156,19 +157,19 @@ public class Module implements Cloneable {
     }
 
     /**
-     * Returns true if both modules have the same identity and data fields.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+                * Returns true if both modules have the same identity and data fields.
+                */
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
 
-        if (!(other instanceof seedu.address.model.module.Module)) {
-            return false;
-        }
+            if (!(other instanceof seedu.address.model.module.Module)) {
+                return false;
+            }
 
-        return this.moduleCode.equals(((Module) other).moduleCode);
+            return this.moduleCode.equals(((Module) other).moduleCode);
     }
 
     @Override

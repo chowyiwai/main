@@ -48,6 +48,7 @@ public class AddModuleCommand extends Command {
         }
 
         model.addModule(moduleCode, sem);
+        model.addToHistory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCode, sem));
     }
 

@@ -57,6 +57,7 @@ public class CreateTagCommand extends Command {
 
         UserTag toCreate = new UserTag(tagName);
         uniqueTagList.addTag(toCreate);
+        model.addToHistory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 

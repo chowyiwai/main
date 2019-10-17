@@ -63,11 +63,11 @@ public class TagModuleCommand extends Command {
         }
 
         module.addTag(toAdd);
+        model.addToHistory();
 
         if (newTagCreated) {
             return new CommandResult(String.format(MESSAGE_SUCCESS_TAG_ADDED, toAdd, module));
         }
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, module));
     }
 
