@@ -15,7 +15,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.tag.UserTag;
 
 /**
  * Removes a {@code Tag} from a {@code Module}.
@@ -25,11 +24,11 @@ public class RemoveTagFromModuleCommand extends Command {
     public static final String COMMAND_WORD = "removetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Removes the specified tag from the specified module "
-        + "Parameters: "
-        + PREFIX_MODULE_CODE + "MODULE_CODE "
-        + PREFIX_TAG + "TAG_NAME \n"
-        + "Example: "
-        + "remove m/CS3230 t/exchange";
+            + "Parameters: "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
+            + PREFIX_TAG + "TAG_NAME \n"
+            + "Example: "
+            + "remove m/CS3230 t/exchange";
 
     public static final String MESSAGE_SUCCESS = "Tag %1$s removed from %2$s";
     public static final String MESSAGE_TAG_NOT_FOUND = "The module %1$s does not have the tag %2$s";
@@ -39,14 +38,14 @@ public class RemoveTagFromModuleCommand extends Command {
     private final String moduleCode;
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/logic/commands/datamanagement/RemoveTagFromModuleCommand.java
+     * <<<<<<< HEAD:src/main/java/seedu/address/logic/commands/datamanagement/RemoveTagFromModuleCommand.java
      * Creates an {@code RemoveTagFromModuleCommand} to move a tag with the given name from the specified module.
-     * @param tagName The name of the tag.
-=======
-     * Creates an {@code RemoveTagCommand} to move a tag with the given name from the specified module.
      *
      * @param tagName    The name of the tag.
->>>>>>> master:src/main/java/seedu/address/logic/commands/datamanagement/RemoveTagCommand.java
+     *                   =======
+     *                   Creates an {@code RemoveTagCommand} to move a tag with the given name from the module.
+     * @param tagName    The name of the tag.
+     *                   >>>>>>> master:src/main/java/seedu/address/logic/commands/datamanagement/RemoveTagCommand.java
      * @param moduleCode The module code of the module from which the tag is to be deleted.
      */
 
@@ -75,7 +74,8 @@ public class RemoveTagFromModuleCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_DEFAULT_TAG_MODIFICATION);
         }
 
-        targetModule.getTags().remove((UserTag) toDelete);
+        targetModule.getTags().remove(toDelete);
+        model.addToHistory();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete, targetModule));
     }

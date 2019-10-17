@@ -49,6 +49,8 @@ public class CreateStudyPlanCommand extends Command {
         }
 
         model.addStudyPlan(studyPlanToAdd);
+        model.addToHistory();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, studyPlanName));
     }
 

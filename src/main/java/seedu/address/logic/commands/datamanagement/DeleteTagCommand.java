@@ -23,10 +23,10 @@ public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Deletes the tag with the specified tag name "
-        + "Parameters: "
-        + PREFIX_TAG + "TAG_NAME \n"
-        + "Example: "
-        + "delete t/exchange";
+            + "Parameters: "
+            + PREFIX_TAG + "TAG_NAME \n"
+            + "Example: "
+            + "delete t/exchange";
 
     public static final String MESSAGE_SUCCESS = "Tag deleted: %1$s";
     public static final String MESSAGE_TAG_CANNOT_BE_FOUND = "This tag does not exist";
@@ -36,6 +36,7 @@ public class DeleteTagCommand extends Command {
 
     /**
      * Creates an {@code DeleteTagCommand} to delete the tag with the given name.
+     *
      * @param tagName
      */
     public DeleteTagCommand(String tagName) {
@@ -65,13 +66,14 @@ public class DeleteTagCommand extends Command {
         // delete from list in every module
         HashMap<String, Module> moduleHashMap = activeStudyPlan.getModules();
         Set<String> moduleCodes = moduleHashMap.keySet();
-        for (String moduleCode: moduleCodes) {
+        for (String moduleCode : moduleCodes) {
             Module currentModule = moduleHashMap.get(moduleCode);
             UniqueTagList moduleTagList = currentModule.getTags();
             if (moduleTagList.containsTagWithName(tagName)) {
-                moduleTagList.remove((UserTag) moduleTagList.getTag(tagName));
+                moduleTagList.remove(moduleTagList.getTag(tagName));
             }
         }
+        model.addToHistory();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
     }

@@ -62,6 +62,7 @@ public class DeleteCommand extends Command {
                 return new CommandResult(MESSAGE_NO_MORE_STUDYPLAN);
             }
         }
+        model.addToHistory();
 
         return new CommandResult(String.format(MESSAGE_DELETE_STUDYPLAN_SUCCESS, studyPlanToDelete));
     }

@@ -43,6 +43,8 @@ public class DeleteModuleCommand extends Command {
         }
 
         model.removeModule(moduleCode, sem);
+        model.addToHistory();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCode, sem));
     }
 

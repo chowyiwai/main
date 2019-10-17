@@ -23,11 +23,11 @@ public class RemoveTagFromAllCommand extends Command {
     public static final String COMMAND_WORD = "removeall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Removes the tag with the specified tag name "
-        + "from all modules "
-        + "Parameters: "
-        + PREFIX_TAG + "TAG_NAME \n"
-        + "Example: "
-        + "removeall t/exchange";
+            + "from all modules "
+            + "Parameters: "
+            + PREFIX_TAG + "TAG_NAME \n"
+            + "Example: "
+            + "removeall t/exchange";
 
     public static final String MESSAGE_SUCCESS = "Tag removed from all modules: %1$s";
     public static final String MESSAGE_TAG_CANNOT_BE_FOUND = "This tag does not exist";
@@ -37,6 +37,7 @@ public class RemoveTagFromAllCommand extends Command {
 
     /**
      * Creates an {@code RemoveTagFromAllCommand} to remove the tag with the given name from all modules.
+     *
      * @param tagName
      */
     public RemoveTagFromAllCommand(String tagName) {
@@ -64,13 +65,14 @@ public class RemoveTagFromAllCommand extends Command {
         // delete from list in every module
         HashMap<String, Module> moduleHashMap = activeStudyPlan.getModules();
         Set<String> moduleCodes = moduleHashMap.keySet();
-        for (String moduleCode: moduleCodes) {
+        for (String moduleCode : moduleCodes) {
             Module currentModule = moduleHashMap.get(moduleCode);
             UniqueTagList moduleTagList = currentModule.getTags();
             if (moduleTagList.containsTagWithName(tagName)) {
-                moduleTagList.remove((UserTag) moduleTagList.getTag(tagName));
+                moduleTagList.remove(moduleTagList.getTag(tagName));
             }
         }
+        model.addToHistory();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
     }
