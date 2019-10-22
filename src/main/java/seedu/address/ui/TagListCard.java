@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.model.Color;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,10 +25,13 @@ public class TagListCard extends UiPart<Region> {
     public TagListCard(Tag tag) {
         super(FXML);
         this.tag = tag;
-        tags.getChildren().add(new Label(tag.getTagName()));
+        Label tagLabel = new Label(tag.getTagName());
+        tags.getChildren().add(tagLabel);
         if (tag.isDefault()) {
+            tagLabel.setId("defaultTag");
             tagDescription.setText("default tag description will be here");
         } else {
+            tagLabel.setId("userTag");
             tagDescription.setText("");
         }
     }
