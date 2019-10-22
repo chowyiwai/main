@@ -27,8 +27,10 @@ import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanEditCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
 import seedu.address.logic.commands.storage.DeleteCommand;
+import seedu.address.logic.commands.storage.DeleteCommitCommand;
 import seedu.address.logic.commands.storage.EditTitleCommand;
 import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
+import seedu.address.logic.commands.storage.RevertCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
@@ -48,9 +50,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.storage.ActivateStudyPlanParser;
 import seedu.address.logic.parser.storage.CommitStudyPlanEditsParser;
 import seedu.address.logic.parser.storage.CreateStudyPlanCommandParser;
+import seedu.address.logic.parser.storage.DeleteCommitCommandParser;
 import seedu.address.logic.parser.storage.DeleteStudyPlanParser;
 import seedu.address.logic.parser.storage.EditStudyPlanTitleParser;
 import seedu.address.logic.parser.storage.ListAllStudyPlansParser;
+import seedu.address.logic.parser.storage.RevertCommitParser;
 import seedu.address.logic.parser.storage.ViewCommitHistoryParser;
 import seedu.address.logic.parser.verification.DescriptionCommandParser;
 import seedu.address.logic.parser.verification.ValidModsCommandParser;
@@ -143,6 +147,9 @@ public class ModulePlannerParser {
         case ListAllStudyPlansCommand.COMMAND_WORD:
             return new ListAllStudyPlansParser().parse(arguments);
 
+        case RevertCommitCommand.COMMAND_WORD:
+            return new RevertCommitParser().parse(arguments);
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
@@ -157,6 +164,9 @@ public class ModulePlannerParser {
 
         case RemoveAllTagsCommand.COMMAND_WORD:
             return new RemoveAllTagsCommand();
+
+        case DeleteCommitCommand.COMMAND_WORD:
+            return new DeleteCommitCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
