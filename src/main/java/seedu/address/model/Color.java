@@ -41,4 +41,8 @@ public enum Color {
     public String getHexValue() {
         return hexValue;
     }
+
+    public String getColorName() {
+        return colorName;
+    }
 }
