@@ -201,8 +201,12 @@ public class UniqueTagList implements Iterable<Tag>, Cloneable {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone() {
+        UniqueTagList clone = new UniqueTagList();
+        for (Tag tag : this) {
+            clone.addTag(tag);
+        }
+        return clone;
     }
 
     private HashMap<String, Tag> getMapTags() {
@@ -236,6 +240,10 @@ public class UniqueTagList implements Iterable<Tag>, Cloneable {
         for (DefaultTagType defaultTagType : DefaultTagType.values()) {
            addTag(new DefaultTag(defaultTagType));
         }
+    }
+
+    public List<String> asListOfStrings() {
+        return asUnmodifiableObservableList().stream().map(Tag::getTagName).collect(Collectors.toList());
     }
 
 }
