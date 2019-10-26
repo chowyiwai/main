@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.datamanagement;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -64,7 +66,7 @@ public class RemoveAllTagsCommandTest {
     }
 
     @Test
-    public void execute_noUserTagsPresentInStudyPlanAndModules_noUserTagsRemovedSuccessful() {
+    public void execute_noUserTagsPresentInStudyPlanAndModules_throwsException() {
         // construct two modules with no user tags
         Module cs1231 = new ModuleBuilder().build();
         Module cs2100 = new ModuleBuilder().withModuleCode("CS2100").build();
@@ -80,7 +82,8 @@ public class RemoveAllTagsCommandTest {
 
         // construct command to remove all tags
         RemoveAllTagsCommand removeAllTagsCommand = new RemoveAllTagsCommand();
-        assertCommandSuccess(removeAllTagsCommand, model, RemoveAllTagsCommand.MESSAGE_SUCCESS, model);
+        assertThrows(CommandException.class, () -> removeAllTagsCommand.execute(model),
+                RemoveAllTagsCommand.MESSAGE_NO_TAGS_TO_REMOVE);
     }
 
     @Test

@@ -23,6 +23,7 @@ public class ViewModuleTagsCommand extends Command {
             + "viewtags CS3230";
 
     public static final String MESSAGE_SUCCESS = "All tags for the module shown";
+    public static final String MESSAGE_NO_TAGS_FOUND = "This module does not have any tags";
     private final String moduleCode;
 
     /**
@@ -38,6 +39,10 @@ public class ViewModuleTagsCommand extends Command {
         requireNonNull(model);
 
         UniqueTagList tags = model.getModuleTagsFromActiveSp(moduleCode);
+
+        if (tags.asUnmodifiableObservableList().size() == 0) {
+            throw new CommandException(MESSAGE_NO_TAGS_FOUND);
+        }
 
         return new CommandResult(MESSAGE_SUCCESS, ResultViewType.TAG, tags.asUnmodifiableObservableList());
     }

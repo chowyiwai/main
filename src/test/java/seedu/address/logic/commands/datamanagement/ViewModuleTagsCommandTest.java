@@ -10,6 +10,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -48,8 +49,13 @@ public class ViewModuleTagsCommandTest {
         // construct model containing study plan with two user tags
         StudyPlan studyPlan = new StudyPlanBuilder().withTags(validTagNameOne, validTagNameTwo)
                 .withModules(moduleHashMap).build();
+
         // assign default tags to the module
-        studyPlan.assignDefaultTags(TypicalModulesInfo.CS1231S);
+        UniqueTagList moduleDefaultTags = studyPlan.assignDefaultTags(TypicalModulesInfo.CS1231S);
+        for (Tag defaultTag: moduleDefaultTags) {
+            cs1231s.addTag(defaultTag);
+        }
+
         Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
                 new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
         model.activateFirstStudyPlan();
@@ -82,7 +88,8 @@ public class ViewModuleTagsCommandTest {
         StudyPlan studyPlan = new StudyPlanBuilder().withTags(validTagNameOne)
                 .withModules(moduleHashMap).build();
         // assign default tags to the module
-        studyPlan.assignDefaultTags(TypicalModulesInfo.CS1231S);
+        cs1231s.getTags().setTags(studyPlan.assignDefaultTags(TypicalModulesInfo.CS1231S));
+
         Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
                 new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
         model.activateFirstStudyPlan();
@@ -98,6 +105,31 @@ public class ViewModuleTagsCommandTest {
         // construct command to show all tags for the module
         ViewModuleTagsCommand viewModuleTagsCommand = new ViewModuleTagsCommand("CS1231S");
         assertCommandSuccess(viewModuleTagsCommand, model, expectedCommandResult, model);
+    }
+
+    @Test
+    public void execute_noTagsPresentInModule_throwsCommandException() {
+        // construct module with no user tags
+        Module cs2101 = new ModuleBuilder().withModuleCode("CS2101").build();
+        HashMap<String, Module> moduleHashMap = new HashMap<String, Module>();
+        moduleHashMap.put("CS2101", cs2101);
+
+        // construct model containing study plan
+        StudyPlan studyPlan = new StudyPlanBuilder().withModules(moduleHashMap).build();
+        Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
+                new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
+        model.activateFirstStudyPlan();
+
+        // construct list of tags that should be shown
+        UniqueTagList expectedList = new UniqueTagList();
+
+        CommandResult expectedCommandResult = new CommandResult(ViewModuleTagsCommand.MESSAGE_NO_TAGS_FOUND,
+                ResultViewType.TAG, expectedList.asUnmodifiableObservableList());
+
+        // construct command to show all tags for the module
+        ViewModuleTagsCommand viewModuleTagsCommand = new ViewModuleTagsCommand("CS2101");
+        assertThrows(CommandException.class, () -> viewModuleTagsCommand.execute(model),
+                ViewModuleTagsCommand.MESSAGE_NO_TAGS_FOUND);
     }
 
     @Test
