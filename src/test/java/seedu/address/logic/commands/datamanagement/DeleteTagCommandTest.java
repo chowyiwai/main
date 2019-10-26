@@ -68,8 +68,8 @@ public class DeleteTagCommandTest {
         Module cs1231 = new ModuleBuilder().withTags(validTagNameOne, validTagNameTwo).build();
         Module cs2100 = new ModuleBuilder().withModuleCode("CS2100").withTags(validTagNameOne, validTagNameTwo).build();
         HashMap<String, Module> moduleHashMap = new HashMap<String, Module>();
-        moduleHashMap.put("moduleOne", cs1231);
-        moduleHashMap.put("moduleTwo", cs2100);
+        moduleHashMap.put("CS1231", cs1231);
+        moduleHashMap.put("CS2100", cs2100);
 
         // construct model containing study plan with two tags
         StudyPlan studyPlan = new StudyPlanBuilder().withTags(validTagNameOne, validTagNameTwo)
@@ -78,7 +78,7 @@ public class DeleteTagCommandTest {
                 new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
         model.activateFirstStudyPlan();
 
-        // construct two expected modules with only one tags
+        // construct two expected modules with only one tag
         Module expectedCS1231 = new ModuleBuilder().withTags(validTagNameTwo).build();
         Module expectedCS2100 = new ModuleBuilder().withModuleCode("CS2100").withTags(validTagNameTwo).build();
         HashMap<String, Module> expectedModuleHashMap = new HashMap<String, Module>();
@@ -99,8 +99,8 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_tagNotPresentInStudyPlan_throwsException() throws Exception {
-        // construct tags
+    public void execute_tagNotPresentInStudyPlan_throwsCommandException() {
+        // construct tag
         Tag validTagOne = new TagBuilder().buildTestUserTag();
         String validTagNameOne = validTagOne.getTagName();
 
@@ -117,7 +117,7 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_deleteDefaultTag_throwsException() throws Exception {
+    public void execute_deleteDefaultTag_throwsException() {
         // construct model containing study plan with two tags
         StudyPlan studyPlan = new StudyPlanBuilder().build();
         Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
@@ -148,7 +148,7 @@ public class DeleteTagCommandTest {
         // null -> returns false
         assertFalse(deleteTestUserTagCommand.equals(null));
 
-        // different studyPlan -> returns false
+        // different user tag -> returns false
         assertFalse(deleteTestUserTagCommand.equals(deleteOtherUserTagCommand));
     }
 
