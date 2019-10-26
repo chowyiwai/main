@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,7 +18,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.ModulePlannerBuilder;
 import seedu.address.testutil.StudyPlanBuilder;
@@ -30,7 +30,7 @@ public class ViewTaggedCommandTest {
     @Test
     public void constructor_nullTagName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ViewTaggedCommand("exchange", "core", null));
-        assertThrows(NullPointerException.class, () -> new ViewTaggedCommand( "core", null));
+        assertThrows(NullPointerException.class, () -> new ViewTaggedCommand("core", null));
     }
 
     @Test
