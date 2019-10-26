@@ -82,7 +82,7 @@ public class TagModuleCommandTest {
     }
 
     @Test
-    public void execute_tagPresentInStudyPlan_AddSuccessful() {
+    public void execute_tagPresentInStudyPlan_addSuccessful() {
         // construct user tag
         Tag validTagOne = new TagBuilder().buildTestUserTag();
         String validTagNameOne = validTagOne.getTagName();
@@ -190,5 +190,4 @@ public class TagModuleCommandTest {
         // different module code -> returns false
         assertFalse(tagUserTagToModuleCommand.equals(tagUserTagToOtherModuleCommand));
     }
-    
 }

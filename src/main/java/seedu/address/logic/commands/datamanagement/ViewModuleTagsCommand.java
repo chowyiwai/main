@@ -2,8 +2,6 @@ package seedu.address.logic.commands.datamanagement;
 
 import static java.util.Objects.requireNonNull;
 
-import javax.swing.text.View;
-
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;

@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -21,8 +22,6 @@ import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.ModulePlannerBuilder;
 import seedu.address.testutil.StudyPlanBuilder;
 import seedu.address.testutil.TagBuilder;
-import seedu.address.testutil.TypicalModule;
-import seedu.address.testutil.TypicalModuleHashMap;
 import seedu.address.testutil.TypicalModulesInfo;
 import seedu.address.ui.ResultViewType;
 
@@ -122,5 +121,4 @@ public class ViewModuleTagsCommandTest {
         // different module code -> returns false
         assertFalse(viewModuleTagsCommand.equals(viewOtherModuleTagsCommand));
     }
-    
 }
