@@ -177,7 +177,7 @@ public class ValidModsCommandTest {
         }
 
         @Override
-        public void updatePrereqs() {
+        public void refresh() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -263,6 +263,11 @@ public class ValidModsCommandTest {
 
         @Override
         public HashMap<String, Module> getModulesFromActiveSp() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //@Override
+        public void deleteAllModulesInSemester(SemesterName semesterName) {
             throw new AssertionError("This method should not be called.");
         }
 

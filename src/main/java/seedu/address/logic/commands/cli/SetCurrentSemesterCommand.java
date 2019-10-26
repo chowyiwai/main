@@ -35,6 +35,7 @@ public class SetCurrentSemesterCommand extends Command {
         model.setSemester(sem);
         model.updateAllCompletedTags();
         model.addToHistory();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, sem));
     }
 

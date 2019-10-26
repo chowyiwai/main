@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -129,11 +130,19 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     }
 
     /**
+     * Returns the current active tags.
+     */
+    public UniqueTagList getActiveTags() {
+        return activeStudyPlan.getTags();
+    }
+
+    /**
      * Activates the study plan with the given index, and returns the active study plan populated with relevant
      * details.
      */
     public StudyPlan activateStudyPlan(int index) throws StudyPlanNotFoundException {
         boolean foundStudyPlan = false;
+        Iterator<StudyPlan> iterator = studyPlans.iterator();
         for (StudyPlan studyPlan : studyPlans) {
             if (studyPlan.getIndex() == index) {
                 activeStudyPlan = studyPlan;
@@ -163,6 +172,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
             for (Tag defaultTag : defaultTags) {
                 module.getTags().addTag(defaultTag);
             }
+
         }
 
         // replace skeletal modules under semesters with the actual reference to modules in mega list
@@ -220,8 +230,18 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     }
 
     /**
-     * =======
-     * >>>>>>> upstream/undoredo-fix
+<<<<<<< HEAD
+     * Sets the current semester. The user cannot change any module before the current semester. But they can
+     * still change those in the current semester and after the current semester.
+     */
+    public void setCurrentSemester(SemesterName semesterName) {
+        currentSemester = semesterName;
+        activeStudyPlan.setCurrentSemester(semesterName);
+    }
+
+    /**
+=======
+>>>>>>> Undo redo updates, still not working
      * Returns the current semester. The user cannot change any module before the current semester. But they can
      * still change those in the current semester and after the current semester.
      *
@@ -229,16 +249,6 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
      */
     public SemesterName getCurrentSemester() {
         return currentSemester;
-    }
-
-    /**
-     * <<<<<<< HEAD
-     * Sets the current semester. The user cannot change any module before the current semester. But they can
-     * still change those in the current semester and after the current semester.
-     */
-    public void setCurrentSemester(SemesterName semesterName) {
-        currentSemester = semesterName;
-        activeStudyPlan.setCurrentSemester(semesterName);
     }
 
     /**
@@ -256,6 +266,13 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         return moduleInfo == null ? null : moduleInfo.getInformation();
     }
 
+    /**
+     * Deletes all the modules inside a semester of the current active study plan.
+     */
+    public void deleteAllModulesInSemester(SemesterName semesterName) {
+        activeStudyPlan.deleteAllModulesInSemester(semesterName);
+    }
+
     //=========== Module Information and Verification =============================================================
 
     /**
@@ -263,6 +280,13 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
      */
     public ModulesInfo getModulesInfo() {
         return modulesInfo;
+    }
+
+    /**
+     * Returns a list of strings of the module codes.
+     */
+    public List<String> getModuleCodes() {
+        return modulesInfo.getModuleCodeStrings();
     }
 
     /**
@@ -281,8 +305,13 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         return this.activeStudyPlan.getValidMods(semName);
     }
 
+    /**
+     * Changes the title of the active study plan.
+     */
     public void changeActiveStudyPlanTitle(String title) {
-        activeStudyPlan.setTitle(new Title(title));
+        if (this.activeStudyPlan != null) {
+            activeStudyPlan.setTitle(new Title(title));
+        }
     }
 
     //=========== Version Tracking ============================================================================

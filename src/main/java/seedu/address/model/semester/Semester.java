@@ -1,8 +1,5 @@
 package seedu.address.model.semester;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.List;
 
 import seedu.address.model.module.Module;
@@ -17,7 +14,7 @@ public class Semester implements Cloneable {
     private SemesterName semesterName; // removed final keyword for the clone() method below
 
     // Data fields
-    private UniqueModuleList modules = new UniqueModuleList(); // removed final keyword for the clone() method below
+    private UniqueModuleList modules = new UniqueModuleList();
     private boolean isBlocked;
     private String reasonForBlocked;
     private boolean isExpanded = false;
@@ -26,7 +23,6 @@ public class Semester implements Cloneable {
      * SemesterName field must be present and not null.
      */
     public Semester(SemesterName semesterName) {
-        requireNonNull(semesterName);
         this.semesterName = semesterName;
         isBlocked = false;
     }
@@ -36,7 +32,6 @@ public class Semester implements Cloneable {
      */
     public Semester(SemesterName semesterName, boolean isBlocked,
                     String reasonForBlocked, List<Module> modules) {
-        requireAllNonNull(semesterName, isBlocked, reasonForBlocked, modules);
         this.semesterName = semesterName;
         this.isBlocked = isBlocked;
         this.reasonForBlocked = reasonForBlocked;
@@ -102,6 +97,13 @@ public class Semester implements Cloneable {
         return this.modules.contains(module);
     }
 
+    /**
+     * Clears/deletes all modules this semester.
+     */
+    public void clearAllModules() {
+        modules = new UniqueModuleList();
+    }
+
     // NOTE: this is for the GUI to use for Milestone 2
     @Override
     public String toString() {
@@ -109,8 +111,21 @@ public class Semester implements Cloneable {
         result.append(semesterName).append(":").append("\n");
         for (Module module : modules) {
             result.append(module.toString()).append("\n");
+            //result.append(module.getModuleCode().value).append("\n");
         }
 
+        return result.toString();
+    }
+
+    // Added this method to display a simplified list of semesters for commands like viewplan/viewcommit.
+    /**
+     * Converts this semester to a String suitable for display in a simplified study plan.
+     */
+    public String toStringForSimplifiedStudyPlan() {
+        StringBuilder result = new StringBuilder();
+        for (Module module : modules) {
+            result.append("-").append(module.getModuleCode()).append("\n");
+        }
         return result.toString();
     }
 
@@ -128,4 +143,5 @@ public class Semester implements Cloneable {
         }
         return false;
     }
+
 }

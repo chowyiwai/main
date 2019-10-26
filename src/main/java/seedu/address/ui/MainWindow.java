@@ -39,9 +39,13 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private SemesterListPanel semesterListPanel;
     private ResultDisplay resultDisplay;
+    private CommandBox commandBox;
 
     @FXML
     private Label title;
+
+    @FXML
+    private Label mcCount;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -84,17 +88,19 @@ public class MainWindow extends UiPart<Stage> {
             NoActiveStudyPlanDisplay noActiveStudyPlanDisplay = new NoActiveStudyPlanDisplay();
             semesterListPanelPlaceholder.getChildren().add(noActiveStudyPlanDisplay.getRoot());
             title.setText(NO_ACTIVE_STUDY_PLAN);
+            mcCount.setText("");
         } else {
             ObservableList<Semester> semesters = sp.getSemesters().asUnmodifiableObservableList();
             semesterListPanel = new SemesterListPanel(semesters);
             semesterListPanelPlaceholder.getChildren().add(semesterListPanel.getRoot());
             title.setText(sp.getTitle().toString());
+            mcCount.setText(sp.getMcCountString());
         }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, sp);
+        commandBox = new CommandBox(this::executeCommand, logic.getModulePlanner());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -142,8 +148,10 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.removeResultView();
             semesterListPanel.refresh();
 
+            StudyPlan sp = logic.getActiveStudyPlan();
+            mcCount.setText(sp == null ? "" : sp.getMcCountString());
+
             if (commandResult.isChangesActiveStudyPlan()) {
-                StudyPlan sp = logic.getActiveStudyPlan();
                 if (sp == null) {
                     NoActiveStudyPlanDisplay noActiveStudyPlanDisplay = new NoActiveStudyPlanDisplay();
                     semesterListPanelPlaceholder.getChildren().remove(0);
@@ -155,9 +163,7 @@ public class MainWindow extends UiPart<Stage> {
                     semesterListPanelPlaceholder.getChildren().remove(0);
                     semesterListPanelPlaceholder.getChildren().add(semesterListPanel.getRoot());
                     title.setText(sp.getTitle().toString());
-                    commandBoxPlaceholder.getChildren().remove(0);
-                    CommandBox commandBox = new CommandBox(this::executeCommand, sp);
-                    commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+                    commandBox.handleChangeOfActiveStudyPlan();
                 }
             }
 
@@ -202,9 +208,9 @@ public class MainWindow extends UiPart<Stage> {
             //resultDisplay.setResultView(moduleListPanel.getRoot());
             break;
         case STUDY_PLAN:
-            //ObservableList<StudyPlan> studyPlanContent = (ObservableList<StudyPlan>) resultContent;
-            //StudyPlanListPanel = studyPlanListPanel = new StudyPlanListPanel(studyPlanContent);
-            //resultDisplay.setResultView(studyPlanListPanel.getRoot());
+            ObservableList<Semester> studyPlanContent = (ObservableList<Semester>) resultContent;
+            SimpleSemesterListPanel simpleSemesterListPanel = new SimpleSemesterListPanel(studyPlanContent);
+            resultDisplay.setResultView(simpleSemesterListPanel.getRoot());
             break;
         case COMMIT_HISTORY:
             //ObservableList<Commit> commitContent = (ObservableList<Commit>) resultContent;

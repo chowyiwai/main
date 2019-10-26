@@ -23,7 +23,7 @@ public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
      */
-    Predicate<StudyPlan> PREDICATE_SHOW_ALL_STUDY_PLANS = unused -> true;
+    static Predicate<StudyPlan> PREDICATE_SHOW_ALL_STUDY_PLANS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -125,6 +125,11 @@ public interface Model {
      */
     void changeActiveStudyPlanTitle(String title);
 
+    /**
+     * Deletes all the modules inside a semester of the current active study plan.
+     */
+    void deleteAllModulesInSemester(SemesterName semesterName);
+
     // ===================== VERSION TRACKING ==========================
 
     /**
@@ -181,9 +186,9 @@ public interface Model {
     boolean semesterHasModule(String moduleCode, SemesterName semesterName);
 
     /**
-     * Updates the prerequisites.
+     * Refreshes the model by updating the prerequisites, MC count, etc.
      */
-    void updatePrereqs();
+    void refresh();
 
     /**
      * Adds specified module to specified semester

@@ -28,12 +28,8 @@ public class UniqueModuleList implements Iterable<Module>, Cloneable {
     @Override
     public UniqueModuleList clone() {
         UniqueModuleList clone = new UniqueModuleList();
-        for (Module module : this) {
-            try {
-                clone.add(module.clone());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
+        for (Module module: this) {
+            clone.add(module);
         }
         return clone;
     }

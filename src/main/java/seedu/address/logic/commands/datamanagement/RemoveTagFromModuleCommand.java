@@ -33,8 +33,6 @@ public class RemoveTagFromModuleCommand extends Command {
     private final String moduleCode;
 
     /**
-     * Creates an {@code RemoveTagFromModuleCommand} to move a tag with the given name from the specified module.
-     *
      * @param tagName    The name of the tag.
      *                   Creates an {@code RemoveTagFromModuleCommand} to move a tag with the given name from
      *                   the specified module.

@@ -89,11 +89,6 @@ public class StudyPlan implements Cloneable {
         this.currentSemester = currentSemester;
     }
 
-    // make a copy of the current study without incrementing the index, for version tracking commits
-    public StudyPlan copyForCommit() throws CloneNotSupportedException {
-        return this.clone();
-    }
-
     public void setTitle(Title title) {
         this.title = title;
     }
@@ -153,6 +148,28 @@ public class StudyPlan implements Cloneable {
 
     public static void setTotalNumberOfStudyPlans(int totalNumberOfStudyPlans) {
         StudyPlan.totalNumberOfStudyPlans = totalNumberOfStudyPlans;
+    }
+
+    public int getTotalMcCount() {
+        int totalMcCount = 0;
+        for (Semester sem : semesters) {
+            totalMcCount += sem.getMcCount();
+        }
+        return totalMcCount;
+    }
+
+    public int getCompletedMcCount() {
+        int completedMcCount = 0;
+        for (Semester sem : semesters) {
+            if (sem.getSemesterName().compareTo(currentSemester) < 0) {
+                completedMcCount += sem.getMcCount();
+            }
+        }
+        return completedMcCount;
+    }
+
+    public String getMcCountString() {
+        return "(" + getCompletedMcCount() + "/" + getTotalMcCount() + ")";
     }
 
     /**
@@ -402,6 +419,27 @@ public class StudyPlan implements Cloneable {
     }
 
     /**
+     * Deletes all the modules inside a semester of the current active study plan.
+     */
+    public void deleteAllModulesInSemester(SemesterName semesterName) {
+        Semester toDelete = null;
+        Iterator<Semester> iterator = semesters.iterator();
+        while (iterator.hasNext()) {
+            Semester semester = iterator.next();
+            if (semester.getSemesterName().equals(semesterName)) {
+                toDelete = semester;
+            }
+        }
+
+        if (toDelete == null) {
+            throw new SemesterNotFoundException();
+        }
+
+        // delete all modules inside this semester
+        toDelete.clearAllModules();
+    }
+
+    /**
      * Returns true if both study plans of the same index have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two study plans.
      */
@@ -569,16 +607,18 @@ public class StudyPlan implements Cloneable {
 
     @Override
     public String toString() {
-        String toReturn = "Study Plan index: " + index + " Title: " + title.toString();
-        return toReturn;
+        return "Study Plan index: " + index + " Title: " + title.toString();
     }
 
     @Override
-    // TODO: this currently compares only the index. Does this need to be modified?
-    public boolean equals(Object other) {
-        if (other instanceof StudyPlan) {
-            return this.index == ((StudyPlan) other).index;
-            //&& this.semesters.equals(((StudyPlan) other).getSemesters());
+    public boolean equals(Object o) {
+        if (o instanceof StudyPlan) {
+            StudyPlan other = (StudyPlan) o;
+            return this.index == other.index
+                    && this.semesters.equals(other.semesters)
+                    && this.title.equals(other.title)
+                    && this.currentSemester.equals(other.currentSemester)
+                    && this.modules.equals(other.modules);
         } else {
             return false;
         }
