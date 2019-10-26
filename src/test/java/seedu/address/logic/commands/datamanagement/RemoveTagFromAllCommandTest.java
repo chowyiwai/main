@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.datamanagement;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.HashMap;
@@ -126,6 +128,28 @@ public class RemoveTagFromAllCommandTest {
         RemoveTagFromAllCommand removeTagFromAllCommand = new RemoveTagFromAllCommand(validDefaultTag);
         assertThrows(CommandException.class, () -> removeTagFromAllCommand.execute(model),
                 RemoveTagFromAllCommand.MESSAGE_INVALID_DEFAULT_TAG_MODIFICATION);
+    }
+
+    @Test
+    public void equals() {
+        RemoveTagFromAllCommand removeTagFromAllCommand = new RemoveTagFromAllCommand("testUserTag");
+        RemoveTagFromAllCommand removeOtherTagFromAllCommand = new RemoveTagFromAllCommand("otherUserTag");
+
+        // same object -> returns true
+        assertTrue(removeTagFromAllCommand.equals(removeTagFromAllCommand));
+
+        // same values -> returns true
+        RemoveTagFromAllCommand removeTagFromAllCommandCopy = new RemoveTagFromAllCommand("testUserTag");
+        assertTrue(removeTagFromAllCommand.equals(removeTagFromAllCommandCopy));
+
+        // different types -> returns false
+        assertFalse(removeTagFromAllCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(removeTagFromAllCommand.equals(null));
+
+        // different user tag -> returns false
+        assertFalse(removeTagFromAllCommand.equals(removeOtherTagFromAllCommand));
     }
 
 }

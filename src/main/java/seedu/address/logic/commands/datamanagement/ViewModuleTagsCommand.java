@@ -2,6 +2,8 @@ package seedu.address.logic.commands.datamanagement;
 
 import static java.util.Objects.requireNonNull;
 
+import javax.swing.text.View;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,6 +31,7 @@ public class ViewModuleTagsCommand extends Command {
      * Creates an {@code ViewModuleTagsCommand} to show all tags attached to the given module.
      */
     public ViewModuleTagsCommand(String moduleCode) {
+        requireNonNull(moduleCode);
         this.moduleCode = moduleCode;
     }
 
@@ -39,6 +42,13 @@ public class ViewModuleTagsCommand extends Command {
         UniqueTagList tags = model.getModuleTagsFromActiveSp(moduleCode);
 
         return new CommandResult(MESSAGE_SUCCESS, ResultViewType.TAG, tags.asUnmodifiableObservableList());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewModuleTagsCommand // instanceof handles nulls
+                && moduleCode.equals(((ViewModuleTagsCommand) other).moduleCode)); // state check
     }
 
 }

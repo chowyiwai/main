@@ -63,4 +63,12 @@ public class RemoveTagFromAllCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RemoveTagFromAllCommand // instanceof handles nulls
+                && tagName.equals(((RemoveTagFromAllCommand) other).tagName)); // state check
+    }
+
 }
