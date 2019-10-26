@@ -97,7 +97,7 @@ public class CommandResult<T> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, changesActiveStudyPlan, exit);
+        return Objects.hash(feedbackToUser, changesActiveStudyPlan, exit, resultViewType, resultContent);
     }
 
 }
