@@ -13,6 +13,7 @@ import seedu.address.model.module.Name;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
+import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.studyplan.Title;
 import seedu.address.model.studyplan.UniqueStudyPlanList;
@@ -407,6 +408,10 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
 
     public void updateAllCompletedTags() {
         activeStudyPlan.updateAllCompletedTags();
+    }
+
+    public UniqueSemesterList getSemestersFromActiveSp() {
+        return activeStudyPlan.getSemesters();
     }
 
     //=========== Util Methods =================================================================================

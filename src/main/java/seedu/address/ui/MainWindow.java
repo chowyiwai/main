@@ -208,7 +208,7 @@ public class MainWindow extends UiPart<Stage> {
             ModuleListPanel moduleListPanel = new ModuleListPanel(moduleContent);
             resultDisplay.setResultView(moduleListPanel.getRoot());
             break;
-        case STUDY_PLAN:
+        case SEMESTER:
             ObservableList<Semester> studyPlanContent = (ObservableList<Semester>) resultContent;
             SimpleSemesterListPanel simpleSemesterListPanel = new SimpleSemesterListPanel(studyPlanContent);
             resultDisplay.setResultView(simpleSemesterListPanel.getRoot());

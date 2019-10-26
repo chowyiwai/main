@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
+import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -237,6 +238,8 @@ public interface Model {
     UniqueTagList getModuleTagsFromActiveSp(String moduleCode);
 
     HashMap<String, Module> getModulesFromActiveSp();
+
+    UniqueSemesterList getSemestersFromActiveSp();
 
     /**
      * Returns true if the model has previous address book states to restore.

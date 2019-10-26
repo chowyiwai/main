@@ -17,6 +17,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
+import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.studyplan.exceptions.StudyPlanNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -336,6 +337,10 @@ public class ModelManager implements Model {
 
     public HashMap<String, Module> getModulesFromActiveSp() {
         return modulePlanner.getModulesFromActiveSp();
+    }
+
+    public UniqueSemesterList getSemestersFromActiveSp() {
+        return modulePlanner.getSemestersFromActiveSp();
     }
 
     //=========== Undo/Redo =================================================================================

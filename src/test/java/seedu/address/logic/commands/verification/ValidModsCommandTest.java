@@ -20,6 +20,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
+import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -263,6 +264,11 @@ public class ValidModsCommandTest {
 
         @Override
         public HashMap<String, Module> getModulesFromActiveSp() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UniqueSemesterList getSemestersFromActiveSp() {
             throw new AssertionError("This method should not be called.");
         }
 
