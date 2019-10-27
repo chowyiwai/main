@@ -134,7 +134,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
      * Returns the current active tags.
      */
     public UniqueTagList getActiveTags() {
-        return activeStudyPlan.getTags();
+        return activeStudyPlan.getModuleTags();
     }
 
     /**
@@ -378,8 +378,16 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         return activeStudyPlan.addTag(tag, moduleCode);
     }
 
-    public boolean activeSpContainsTag(String tagName) {
-        return activeStudyPlan.containsTag(tagName);
+    public void addStudyPlanTagToSp(Tag tag, int index) {
+        studyPlans.getStudyPlanByIndex(index).addStudyPlanTag(tag);
+    }
+
+    public boolean activeSpContainsModuleTag(String tagName) {
+        return activeStudyPlan.containsModuleTag(tagName);
+    }
+
+    public boolean spContainsStudyPlanTag(String tagName, int index) {
+        return studyPlans.getStudyPlanByIndex(index).containsStudyPlanTag(tagName);
     }
 
     public Tag getTagFromActiveSp(String tagName) {
@@ -387,7 +395,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     }
 
     public UniqueTagList getTagsFromActiveSp() {
-        return activeStudyPlan.getTags();
+        return activeStudyPlan.getModuleTags();
     }
 
     public UniqueTagList getModuleTagsFromActiveSp(String moduleCode) {
@@ -412,6 +420,10 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
 
     public UniqueSemesterList getSemestersFromActiveSp() {
         return activeStudyPlan.getSemesters();
+    }
+
+    public StudyPlan getStudyPlan(int index) {
+        return studyPlans.getStudyPlanByIndex(index);
     }
 
     //=========== Util Methods =================================================================================

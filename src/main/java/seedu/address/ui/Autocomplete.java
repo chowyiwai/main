@@ -198,7 +198,7 @@ public class Autocomplete extends TextField {
      * Resets the argument keywords when there is a change in the active study plan.
      */
     public void handleChangeOfActiveStudyPlan() {
-        tags = modulePlanner.getActiveStudyPlan().getTags();
+        tags = modulePlanner.getActiveStudyPlan().getModuleTags();
         tags.asUnmodifiableObservableList().addListener((ListChangeListener<Tag>) change
             -> generateArgumentKeywords());
         generateArgumentKeywords();

@@ -219,11 +219,15 @@ public interface Model {
 
     // ===================== TAGGING ==========================
 
-    boolean addTagToActiveSp(UserTag tag, String moduleCode);
+    boolean addModuleTagToActiveSp(UserTag tag, String moduleCode);
 
-    boolean activeSpContainsTag(String tagName);
+    void addStudyPlanTagToSp(Tag tag, int index);
 
-    void deleteTagFromActiveSp(UserTag toDelete);
+    boolean activeSpContainsModuleTag(String tagName);
+
+    boolean spContainsStudyPlanTag(String tagName, int index);
+
+    void deleteModuleTagFromActiveSp(UserTag toDelete);
 
     boolean removeTagFromAllModulesInActiveSp(UserTag toRemove);
 
@@ -231,15 +235,17 @@ public interface Model {
 
     void updateAllCompletedTags();
 
-    Tag getTagFromActiveSp(String tagName);
+    Tag getModuleTagFromActiveSp(String tagName);
 
-    UniqueTagList getTagsFromActiveSp();
+    UniqueTagList getModuleTagsFromActiveSp();
 
     UniqueTagList getModuleTagsFromActiveSp(String moduleCode);
 
     HashMap<String, Module> getModulesFromActiveSp();
 
     UniqueSemesterList getSemestersFromActiveSp();
+
+    StudyPlan getStudyPlan(int index);
 
     /**
      * Returns true if the model has previous address book states to restore.

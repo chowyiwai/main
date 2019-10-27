@@ -218,17 +218,27 @@ public class ValidModsCommandTest {
         }
 
         @Override
-        public boolean addTagToActiveSp(UserTag tag, String moduleCode) {
+        public boolean addModuleTagToActiveSp(UserTag tag, String moduleCode) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean activeSpContainsTag(String tagName) {
+        public void addStudyPlanTagToSp(Tag tag, int index) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteTagFromActiveSp(UserTag toDelete) {
+        public boolean activeSpContainsModuleTag(String tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean spContainsStudyPlanTag(String tagName, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteModuleTagFromActiveSp(UserTag toDelete) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -248,12 +258,12 @@ public class ValidModsCommandTest {
         }
 
         @Override
-        public Tag getTagFromActiveSp(String tagName) {
+        public Tag getModuleTagFromActiveSp(String tagName) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public UniqueTagList getTagsFromActiveSp() {
+        public UniqueTagList getModuleTagsFromActiveSp() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -269,6 +279,11 @@ public class ValidModsCommandTest {
 
         @Override
         public UniqueSemesterList getSemestersFromActiveSp() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StudyPlan getStudyPlan(int index) {
             throw new AssertionError("This method should not be called.");
         }
 
