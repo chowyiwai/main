@@ -26,6 +26,7 @@ public class RemoveTagFromModuleCommand extends Command {
             + "remove CS3230 exchange";
 
     public static final String MESSAGE_SUCCESS = "Tag %1$s removed from %2$s";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "This module does not exist.";
     public static final String MESSAGE_TAG_NOT_FOUND = "The module %1$s does not have the tag [%2$s]";
     public static final String MESSAGE_INVALID_DEFAULT_TAG_MODIFICATION = "Default tags cannot be removed";
 
@@ -48,6 +49,10 @@ public class RemoveTagFromModuleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!model.isValidModuleCode(this.moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
+        }
 
         Tag toRemove;
         try {

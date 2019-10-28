@@ -25,6 +25,7 @@ public class TagModuleCommand extends Command {
             + "tag CS3230 exchange";
 
     public static final String MESSAGE_SUCCESS_TAG_CREATED = "A new tag %1$s has been created and added to module %2$s";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "This module does not exist.";
     public static final String MESSAGE_SUCCESS = "Tag %1$s has been added to module %2$s";
     public static final String MESSAGE_EXISTING_TAG = "Tag %1$s is already attached to %2$s";
     public static final String MESSAGE_INVALID_DEFAULT_TAG_MODIFICATION = "Default tags cannot be added";
@@ -47,6 +48,10 @@ public class TagModuleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!model.isValidModuleCode(this.moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
+        }
 
         Tag toAdd;
         if (!model.activeSpContainsModuleTag(tagName)) {
