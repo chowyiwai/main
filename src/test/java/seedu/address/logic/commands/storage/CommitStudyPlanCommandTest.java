@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModulesInfo.getTypicalModulesInfo;
 import static seedu.address.testutil.TypicalStudyPlans.SP_1;
 import static seedu.address.testutil.TypicalStudyPlans.getTypicalModulePlanner;
-import static seedu.address.testutil.TypicalVersionTrackingManager.SP_1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
