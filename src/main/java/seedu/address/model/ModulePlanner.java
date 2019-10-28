@@ -402,6 +402,10 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         studyPlans.getStudyPlanByIndex(index).addStudyPlanTag(tag);
     }
 
+    public void removeStudyPlanTagFromSp(Tag tag, int index) {
+        studyPlans.getStudyPlanByIndex(index).removeStudyPlanTag(tag);
+    }
+
     public boolean activeSpContainsModuleTag(String tagName) {
         return activeStudyPlan.containsModuleTag(tagName);
     }

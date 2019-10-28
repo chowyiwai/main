@@ -43,7 +43,7 @@ public class TagStudyPlanCommandTest {
         expectedModel.addStudyPlan(expectedStudyPlan);
         expectedModel.addToHistory();
 
-        // construct command to add a user tag
+        // construct command to add a priority tag
         TagStudyPlanCommand tagStudyPlanCommand = new TagStudyPlanCommand("HIGH", 1);
         assertCommandSuccess(tagStudyPlanCommand, model, String.format(TagStudyPlanCommand.MESSAGE_SUCCESS,
                 validTagOne, studyPlan), expectedModel);
@@ -54,12 +54,12 @@ public class TagStudyPlanCommandTest {
         // construct priority tag
         Tag validTagOne = new TagBuilder().buildPriorityHighTag();
 
-        // construct model containing study plan with no tags
+        // construct model containing study plan with the tag
         StudyPlan studyPlan = new StudyPlanBuilder().withStudyPlanTags(validTagOne).build();
         Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
                 new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
 
-        // construct command to add a user tag
+        // construct command to add a priority tag
         TagStudyPlanCommand tagStudyPlanCommand = new TagStudyPlanCommand("HIGH", 1);
         assertThrows(CommandException.class, () -> tagStudyPlanCommand.execute(model),
                 TagStudyPlanCommand.MESSAGE_TAG_ALREADY_EXISTS);
@@ -69,7 +69,7 @@ public class TagStudyPlanCommandTest {
     public void equals() {
         TagStudyPlanCommand tagStudyPlanCommand = new TagStudyPlanCommand("HIGH", 1);
         TagStudyPlanCommand tagOtherStudyPlanCommand = new TagStudyPlanCommand("HIGH", 2);
-        TagStudyPlanCommand tagOtherTagToStudyPlan = new TagStudyPlanCommand("MEDIUM", 1);
+        TagStudyPlanCommand tagOtherTagToStudyPlanCommand = new TagStudyPlanCommand("MEDIUM", 1);
 
         // same object -> returns true
         assertTrue(tagStudyPlanCommand.equals(tagStudyPlanCommand));
@@ -85,7 +85,7 @@ public class TagStudyPlanCommandTest {
         assertFalse(tagStudyPlanCommand.equals(null));
 
         // different priority tag -> returns false
-        assertFalse(tagStudyPlanCommand.equals(tagOtherTagToStudyPlan));
+        assertFalse(tagStudyPlanCommand.equals(tagOtherTagToStudyPlanCommand));
 
         // different study plan -> returns false
         assertFalse(tagStudyPlanCommand.equals(tagOtherStudyPlanCommand));

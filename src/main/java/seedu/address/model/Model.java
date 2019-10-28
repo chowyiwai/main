@@ -223,6 +223,8 @@ public interface Model {
 
     void addStudyPlanTagToSp(Tag tag, int index);
 
+    void removeStudyPlanTagFromSp(Tag tag, int index);
+
     boolean activeSpContainsModuleTag(String tagName);
 
     boolean spContainsStudyPlanTag(String tagName, int index);

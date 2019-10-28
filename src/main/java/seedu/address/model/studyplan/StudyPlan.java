@@ -25,6 +25,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
 import seedu.address.model.tag.exceptions.InvalidTagException;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Represents a study plan in the module planner.
@@ -582,6 +583,13 @@ public class StudyPlan implements Cloneable {
             throw new InvalidTagException("Only priority tags or focus area tags can be attached to a study plan");
         }
         studyPlanTags.addTag(tag);
+    }
+
+    public void removeStudyPlanTag(Tag tag) throws TagNotFoundException {
+        if (!studyPlanTags.contains(tag)) {
+            throw new TagNotFoundException();
+        }
+        studyPlanTags.removeTag(tag);
     }
 
     /**

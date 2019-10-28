@@ -307,6 +307,10 @@ public class ModelManager implements Model {
         modulePlanner.addStudyPlanTagToSp(tag, index);
     }
 
+    public void removeStudyPlanTagFromSp(Tag tag, int index) {
+        modulePlanner.removeStudyPlanTagFromSp(tag, index);
+    }
+
     public boolean activeSpContainsModuleTag(String tagName) {
         return modulePlanner.activeSpContainsModuleTag(tagName);
     }

@@ -228,6 +228,11 @@ public class ValidModsCommandTest {
         }
 
         @Override
+        public void removeStudyPlanTagFromSp(Tag tag, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean activeSpContainsModuleTag(String tagName) {
             throw new AssertionError("This method should not be called.");
         }
