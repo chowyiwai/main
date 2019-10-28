@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.studyplan.StudyPlan;
+import seedu.address.model.tag.PriorityTagType;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ModulePlannerBuilder;
 import seedu.address.testutil.StudyPlanBuilder;
@@ -47,6 +48,31 @@ public class TagStudyPlanCommandTest {
         TagStudyPlanCommand tagStudyPlanCommand = new TagStudyPlanCommand("HIGH", 1);
         assertCommandSuccess(tagStudyPlanCommand, model, String.format(TagStudyPlanCommand.MESSAGE_SUCCESS,
                 validTagOne, studyPlan), expectedModel);
+    }
+
+    @Test
+    public void execute_otherPriorityTagInStudyPlan_addSuccessful() {
+        // construct priority tag
+        Tag validTagOne = new TagBuilder().buildPriorityHighTag();
+        Tag validTagTwo = new TagBuilder().buildPriorityTag(PriorityTagType.LOW);
+
+        // construct model containing study plan with one tag
+        StudyPlan studyPlan = new StudyPlanBuilder().withStudyPlanTags(validTagOne).build();
+        Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
+                new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
+
+        // construct expected model containing study plan with another tag
+        StudyPlan expectedStudyPlan = new StudyPlanBuilder().withStudyPlanTags(validTagTwo).build();
+        Model expectedModel = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
+                new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
+        expectedModel.deleteStudyPlan(studyPlan);
+        expectedModel.addStudyPlan(expectedStudyPlan);
+        expectedModel.addToHistory();
+
+        // construct command to add a priority tag
+        TagStudyPlanCommand tagStudyPlanCommand = new TagStudyPlanCommand("LOW", 1);
+        assertCommandSuccess(tagStudyPlanCommand, model, String.format(TagStudyPlanCommand.MESSAGE_SUCCESS,
+                validTagTwo, studyPlan), expectedModel);
     }
 
     @Test

@@ -12,6 +12,7 @@ import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
 import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
@@ -224,6 +225,10 @@ public interface Model {
     void addStudyPlanTagToSp(Tag tag, int index);
 
     void removeStudyPlanTagFromSp(Tag tag, int index);
+
+    boolean spContainsPriorityTag(int index);
+
+    PriorityTag getPriorityTagFromSp(int index);
 
     boolean activeSpContainsModuleTag(String tagName);
 

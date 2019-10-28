@@ -9,6 +9,9 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.PriorityTagType;
 
+/**
+ * Removes a priority tag from the study plan.
+ */
 public class RemoveTagFromStudyPlanCommand extends Command {
 
     public static final String COMMAND_WORD = "removesptag";

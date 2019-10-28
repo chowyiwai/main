@@ -49,6 +49,10 @@ public class TagStudyPlanCommand extends Command {
                     priorityTag));
         }
 
+        if (model.spContainsPriorityTag(index)) {
+            model.removeStudyPlanTagFromSp(model.getPriorityTagFromSp(index), index);
+        }
+
         model.addStudyPlanTagToSp(priorityTag, index);
         model.addToHistory();
 

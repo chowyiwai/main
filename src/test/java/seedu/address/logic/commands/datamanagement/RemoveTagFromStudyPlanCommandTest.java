@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -15,7 +16,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ModulePlannerBuilder;
 import seedu.address.testutil.StudyPlanBuilder;
 import seedu.address.testutil.TagBuilder;
-import seedu.address.testutil.TypicalModule;
 import seedu.address.testutil.TypicalModulesInfo;
 
 public class RemoveTagFromStudyPlanCommandTest {
