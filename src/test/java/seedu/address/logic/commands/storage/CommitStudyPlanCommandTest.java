@@ -12,8 +12,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.studyplan.StudyPlan;
-import seedu.address.testutil.StudyPlanBuilder;
 
 
 /**
