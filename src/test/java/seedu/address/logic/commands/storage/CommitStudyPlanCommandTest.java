@@ -2,6 +2,7 @@ package seedu.address.logic.commands.storage;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModulesInfo.getTypicalModulesInfo;
+import static seedu.address.testutil.TypicalStudyPlans.SP_1;
 import static seedu.address.testutil.TypicalStudyPlans.getTypicalModulePlanner;
 import static seedu.address.testutil.TypicalVersionTrackingManager.SP_1;
 
