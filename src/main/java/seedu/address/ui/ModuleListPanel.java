@@ -11,8 +11,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Panel containing the list of modules.
