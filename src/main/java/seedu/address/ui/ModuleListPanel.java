@@ -1,11 +1,18 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.UniqueModuleList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Panel containing the list of modules.
@@ -18,7 +25,12 @@ public class ModuleListPanel extends UiPart<Region> {
 
     public ModuleListPanel(ObservableList<Module> modules) {
         super(FXML);
-        moduleListView.setItems(modules);
+        List<Module> sortedModules = modules.stream()
+                .sorted(Comparator.comparing(module -> module.getModuleCode().toString()))
+                .collect(Collectors.toList());
+        UniqueModuleList uniqueModuleList = new UniqueModuleList();
+        uniqueModuleList.setModules(sortedModules);
+        moduleListView.setItems(uniqueModuleList.asUnmodifiableObservableList());
         moduleListView.setCellFactory(listView -> new ModuleListViewCell());
     }
 
