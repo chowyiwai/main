@@ -37,21 +37,17 @@ public class SortStudyPlansByPriorityTagCommand extends Command {
         }
 
         List<StudyPlan> sortedList = studyPlans.stream().sorted((studyPlan1, studyPlan2) -> {
-            if (studyPlan1.equals(studyPlan2)) {
-                return 0;
-            } else {
-                if (studyPlan1.getPriorityTag() == null) {
-                    if (studyPlan2.getPriorityTag() == null) {
-                        return studyPlan1.getIndex() - studyPlan2.getIndex();
-                    } else {
-                        return 1;
-                    }
+            if (studyPlan1.getPriorityTag() == null) {
+                if (studyPlan2.getPriorityTag() == null) {
+                    return studyPlan1.getIndex() - studyPlan2.getIndex();
                 } else {
-                    if (studyPlan2.getPriorityTag() == null) {
-                        return -1;
-                    } else {
-                        return studyPlan1.getPriorityTag().compareTo(studyPlan2.getPriorityTag());
-                    }
+                    return 1;
+                }
+            } else {
+                if (studyPlan2.getPriorityTag() == null) {
+                    return -1;
+                } else {
+                    return studyPlan1.getPriorityTag().compareTo(studyPlan2.getPriorityTag());
                 }
             }
         })
