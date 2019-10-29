@@ -35,9 +35,9 @@ public class SortStudyPlansByPriorityTagCommandTest {
 
         // construct expected string
         StringBuilder toReturn = new StringBuilder(SortStudyPlansByPriorityTagCommand.MESSAGE_SUCCESS);
-        toReturn.append(studyPlanFour.toString() + "\n");
-        toReturn.append(studyPlanThree.toString() + "\n");
-        toReturn.append(studyPlanTwo.toString() + "\n");
+        toReturn.append(studyPlanFour.toString() + " [PRIORITY.HIGH]\n");
+        toReturn.append(studyPlanThree.toString() + " [PRIORITY.MEDIUM]\n");
+        toReturn.append(studyPlanTwo.toString() + " [PRIORITY.LOW]\n");
         toReturn.append(studyPlanOne.toString() + "\n");
 
         SortStudyPlansByPriorityTagCommand sortStudyPlansByPriorityTagCommand =
