@@ -14,8 +14,8 @@ import javafx.scene.control.TextField;
 import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
-import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UnblockCurrentSemesterCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
 import seedu.address.logic.commands.datamanagement.FindModuleCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
@@ -33,12 +33,16 @@ import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
-import seedu.address.logic.commands.storage.DeleteCommand;
 import seedu.address.logic.commands.storage.DeleteCommitCommand;
+import seedu.address.logic.commands.storage.DeleteStudyPlanCommand;
 import seedu.address.logic.commands.storage.EditTitleCommand;
 import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
+import seedu.address.logic.commands.verification.CheckCommand;
+import seedu.address.logic.commands.verification.ClearInvalidModsCommand;
+import seedu.address.logic.commands.verification.DescriptionCommand;
+import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.model.ReadOnlyModulePlanner;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -83,16 +87,7 @@ public class Autocomplete extends TextField {
             Label entryLabel = new Label(result);
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
             item.setOnAction(unused -> {
-                int lastIndex = getText().lastIndexOf(" ");
-                String finalText;
-                if (lastIndex < 0) {
-                    finalText = result;
-                } else {
-                    finalText = getText().substring(0, getText().lastIndexOf(" "))
-                            + " " + result;
-                }
-                setText(finalText);
-                positionCaret(finalText.length());
+                setAutocompleteText(result);
                 keywordMenu.hide();
             });
             menuItems.add(item);
@@ -112,8 +107,7 @@ public class Autocomplete extends TextField {
             input = input.trim();
             String[] inputArray = input.split(" ");
             if (inputArray.length == 1) {
-                completeInput(inputArray[0], commandKeywords, getText().substring(0, getText().lastIndexOf(" "))
-                        + " ");
+                completeInput(inputArray[0], commandKeywords, " ");
             } else if (inputArray[0].equals(HelpCommand.COMMAND_WORD)) {
                 // The Help command uses commands as arguments.
                 completeInput(inputArray[inputArray.length - 1], commandKeywords, HelpCommand.COMMAND_WORD + " ");
@@ -139,9 +133,7 @@ public class Autocomplete extends TextField {
         ArrayList<String> searchResult = new ArrayList<>(keywords.subSet(input,
                 input + Character.MAX_VALUE));
         if (searchResult.size() == 1) {
-            String finalText = currentText + searchResult.get(0);
-            setText(finalText);
-            positionCaret(finalText.length());
+            setAutocompleteText(searchResult.get(0));
         } else if (searchResult.size() > 1) {
             populateMenu(searchResult);
             if (!keywordMenu.isShowing()) {
@@ -153,10 +145,6 @@ public class Autocomplete extends TextField {
         }
     }
 
-    public boolean isMenuShowing() {
-        return keywordMenu.isShowing();
-    }
-
     /**
      * Generates the sorted set of required command keywords.
      */
@@ -165,12 +153,12 @@ public class Autocomplete extends TextField {
         commandKeywords.add(AddModuleCommand.COMMAND_WORD);
         commandKeywords.add(BlockCurrentSemesterCommand.COMMAND_WORD);
         commandKeywords.add(DeleteModuleCommand.COMMAND_WORD);
-        commandKeywords.add(NameUeFromSemesterCommand.COMMAND_WORD);
+        commandKeywords.add(UnblockCurrentSemesterCommand.COMMAND_WORD);
         commandKeywords.add(SetCurrentSemesterCommand.COMMAND_WORD);
         commandKeywords.add(FindModuleCommand.COMMAND_WORD);
         commandKeywords.add(CommitStudyPlanCommand.COMMAND_WORD);
         commandKeywords.add(CreateStudyPlanCommand.COMMAND_WORD);
-        commandKeywords.add(DeleteCommand.COMMAND_WORD);
+        commandKeywords.add(DeleteStudyPlanCommand.COMMAND_WORD);
         commandKeywords.add(DeleteCommitCommand.COMMAND_WORD);
         commandKeywords.add(RevertCommitCommand.COMMAND_WORD);
         commandKeywords.add(TagModuleCommand.COMMAND_WORD);
@@ -190,6 +178,10 @@ public class Autocomplete extends TextField {
         commandKeywords.add(TagStudyPlanCommand.COMMAND_WORD);
         commandKeywords.add(RemoveTagFromStudyPlanCommand.COMMAND_WORD);
         commandKeywords.add(SortStudyPlansByPriorityTagCommand.COMMAND_WORD);
+        commandKeywords.add(ValidModsCommand.COMMAND_WORD);
+        commandKeywords.add(DescriptionCommand.COMMAND_WORD);
+        commandKeywords.add(CheckCommand.COMMAND_WORD);
+        commandKeywords.add(ClearInvalidModsCommand.COMMAND_WORD);
     }
 
     /**
@@ -211,5 +203,18 @@ public class Autocomplete extends TextField {
         tags.asUnmodifiableObservableList().addListener((ListChangeListener<Tag>) change
             -> generateArgumentKeywords());
         generateArgumentKeywords();
+    }
+
+    private void setAutocompleteText(String s) {
+        int lastIndex = getText().lastIndexOf(" ");
+        String finalText;
+        if (lastIndex < 0) {
+            finalText = s;
+        } else {
+            finalText = getText().substring(0, lastIndex)
+                    + " " + s;
+        }
+        setText(finalText);
+        positionCaret(finalText.length());
     }
 }

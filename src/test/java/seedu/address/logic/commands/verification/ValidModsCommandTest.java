@@ -52,6 +52,11 @@ public class ValidModsCommandTest {
         }
 
         @Override
+        public void unblockSemester(SemesterName sem) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getModulePlannerFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -198,15 +203,7 @@ public class ValidModsCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public boolean semesterHasUe(SemesterName semesterName) {
-            throw new AssertionError("This method should not be called.");
-        }
 
-        @Override
-        public void renameUeInSemester(SemesterName semesterName, String moduleCode) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void setSemester(SemesterName semester) {
@@ -309,6 +306,11 @@ public class ValidModsCommandTest {
         }
 
         @Override
+        public void deleteSemester(SemesterName semesterName) {
+
+        }
+
+        @Override
         public boolean canUndoModulePlanner() {
             return false;
         }
@@ -331,6 +333,11 @@ public class ValidModsCommandTest {
         @Override
         public void addToHistory() {
 
+        }
+
+        @Override
+        public int clearInvalidMods() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

@@ -28,14 +28,14 @@ public interface Model {
     static Predicate<StudyPlan> PREDICATE_SHOW_ALL_STUDY_PLANS = unused -> true;
 
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
-     */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
-
-    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -58,14 +58,14 @@ public interface Model {
     void setModulePlannerFilePath(Path modulePlannerFilePath);
 
     /**
-     * Replaces module planner data with the data in {@code ModulePlanner}.
-     */
-    void setModulePlanner(ReadOnlyModulePlanner modulePlanner);
-
-    /**
      * Returns the ModulePlanner
      */
     ReadOnlyModulePlanner getModulePlanner();
+
+    /**
+     * Replaces module planner data with the data in {@code ModulePlanner}.
+     */
+    void setModulePlanner(ReadOnlyModulePlanner modulePlanner);
 
     /**
      * Returns true if a StudyPlan with the same identity as {@code StudyPlan} exists in the module planner.
@@ -132,6 +132,11 @@ public interface Model {
      */
     void deleteAllModulesInSemester(SemesterName semesterName);
 
+    /**
+     * Deletes a semester completely from a study plan. This is applicable to special terms and Year 5 semesters.
+     */
+    void deleteSemester(SemesterName semesterName);
+
     // ===================== VERSION TRACKING ==========================
 
     /**
@@ -183,6 +188,12 @@ public interface Model {
     List<String> getValidMods(SemesterName semName);
 
     /**
+     * Clears all invalid modules, whose prerequisites have not been satisfied.
+     * @return Number of invalid modules that are cleared
+     */
+    int clearInvalidMods();
+
+    /**
      * Returns true if a Semester contains a module with same identity as {@code module}.
      */
     boolean semesterHasModule(String moduleCode, SemesterName semesterName);
@@ -203,16 +214,14 @@ public interface Model {
     void blockSemester(SemesterName sem, String reason);
 
     /**
+     * Unblocks specified semester
+     */
+    void unblockSemester(SemesterName sem);
+
+    /**
      * Removes module from semester
      */
     void removeModule(String moduleCode, SemesterName semesterName);
-
-    /**
-     * Checks whether or not the specified semester contains a UE
-     */
-    boolean semesterHasUe(SemesterName semesterName);
-
-    void renameUeInSemester(SemesterName semesterName, String moduleCode);
 
     void setSemester(SemesterName semester);
 

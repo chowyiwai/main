@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.UniqueModuleList;
@@ -33,6 +34,7 @@ import seedu.address.model.versiontracking.exception.StudyPlanCommitManagerNotFo
  * Duplicates are not allowed (by .isSameStudyPlan comparison)
  */
 public class ModulePlanner implements ReadOnlyModulePlanner {
+
     private final UniqueStudyPlanList studyPlans;
     private final ModulesInfo modulesInfo;
     private final VersionTrackingManager versionTrackingManager;
@@ -219,7 +221,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     }
 
     /**
-     * Activates the first study plan in the list of study plans. This is used in {@code DeleteCommand}.
+     * Activates the first study plan in the list of study plans. This is used in {@code DeleteStudyPlanCommand}.
      * If there is no study plan in the list, the method returns false.
      *
      * @return boolean to indicate whether the first study plan has been activated.
@@ -298,6 +300,13 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         activeStudyPlan.deleteAllModulesInSemester(semesterName);
     }
 
+    /**
+     * Deletes a semester completely from a study plan. This is applicable to special terms and Year 5 semesters.
+     */
+    public void deleteSemester(SemesterName semesterName) {
+        activeStudyPlan.deleteSemester(semesterName);
+    }
+
     //=========== Module Information and Verification =============================================================
 
     /**
@@ -328,6 +337,14 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
             return new ArrayList<>(); // TODO: might want to change it to an assertion, this should not be called maybe?
         }
         return this.activeStudyPlan.getValidMods(semName);
+    }
+
+    public List<Pair<SemesterName, String>> getInvalidModuleCodes() {
+        if (this.activeStudyPlan != null) {
+            return this.activeStudyPlan.getInvalidModuleCodes();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     /**
@@ -458,7 +475,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         return activeStudyPlan.getSemesters();
     }
 
-    public StudyPlan getStudyPlan(int index) {
+    public StudyPlan getStudyPlan(int index) throws StudyPlanNotFoundException {
         return studyPlans.getStudyPlanByIndex(index);
     }
 

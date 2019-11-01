@@ -18,7 +18,6 @@ import seedu.address.model.semester.Semester;
  * An UI component that displays information of a {@code Semester}.
  */
 public class SemesterCard extends UiPart<Region> {
-
     private static final String FXML = "SemesterListCard.fxml";
 
     /**
@@ -58,23 +57,5 @@ public class SemesterCard extends UiPart<Region> {
                     ModuleCard moduleCard = new ModuleCard(module);
                     moduleListPanelPlaceholder.getChildren().add(moduleCard.getRoot());
                 });
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof SemesterCard)) {
-            return false;
-        }
-
-        // state check
-        SemesterCard card = (SemesterCard) other;
-        return id.getText().equals(card.id.getText())
-                && semester.equals(card.semester);
     }
 }

@@ -5,9 +5,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
-import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
 import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UnblockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
 import seedu.address.logic.commands.datamanagement.FindModuleCommand;
@@ -28,14 +28,16 @@ import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
 import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
-import seedu.address.logic.commands.storage.DeleteCommand;
 import seedu.address.logic.commands.storage.DeleteCommitCommand;
 import seedu.address.logic.commands.storage.DeleteSemesterCommand;
+import seedu.address.logic.commands.storage.DeleteStudyPlanCommand;
 import seedu.address.logic.commands.storage.EditTitleCommand;
 import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
+import seedu.address.logic.commands.verification.CheckCommand;
+import seedu.address.logic.commands.verification.ClearInvalidModsCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.logic.parser.Parser;
@@ -61,14 +63,15 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case AddModuleCommand.COMMAND_WORD:
         case BlockCurrentSemesterCommand.COMMAND_WORD:
         case DeleteModuleCommand.COMMAND_WORD:
-        case NameUeFromSemesterCommand.COMMAND_WORD:
+        case UnblockCurrentSemesterCommand.COMMAND_WORD:
         case SetCurrentSemesterCommand.COMMAND_WORD:
         case FindModuleCommand.COMMAND_WORD:
         case DescriptionCommand.COMMAND_WORD:
+        case CheckCommand.COMMAND_WORD:
         case ValidModsCommand.COMMAND_WORD:
         case CommitStudyPlanCommand.COMMAND_WORD:
         case CreateStudyPlanCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteStudyPlanCommand.COMMAND_WORD:
         case TagModuleCommand.COMMAND_WORD:
         case ViewCommitHistoryCommand.COMMAND_WORD:
         case RemoveTagFromModuleCommand.COMMAND_WORD:
@@ -94,6 +97,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case TagStudyPlanCommand.COMMAND_WORD:
         case RemoveTagFromStudyPlanCommand.COMMAND_WORD:
         case SortStudyPlansByPriorityTagCommand.COMMAND_WORD:
+        case ClearInvalidModsCommand.COMMAND_WORD:
             return new HelpCommand(commandName);
         default:
             throw new ParseException(

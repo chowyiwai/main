@@ -19,14 +19,19 @@ public class DeleteCommitCommandParser implements Parser<DeleteCommitCommand> {
      */
     public DeleteCommitCommand parse(String args) throws ParseException {
         String[] commitToken = args.trim().split("\\.");
-        if (commitToken.length != 2 || !commitToken[0].matches("-?\\d+")
-                || !commitToken[1].matches("-?\\d+")) {
+        if (commitToken.length != 2 || !commitToken[0].matches("^\\s*-?[0-9]{1,10}\\s*$")
+                || !commitToken[1].matches("^\\s*-?[0-9]{1,10}\\s*$")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommitCommand.MESSAGE_USAGE));
         }
-        int studyPlanIndex = Integer.parseInt(commitToken[0]);
-        int commitNumber = Integer.parseInt(commitToken[1]);
-        return new DeleteCommitCommand(studyPlanIndex, commitNumber);
+        try {
+            int studyPlanIndex = Integer.parseInt(commitToken[0]);
+            int commitNumber = Integer.parseInt(commitToken[1]);
+            return new DeleteCommitCommand(studyPlanIndex, commitNumber);
+        } catch (NumberFormatException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommitCommand.MESSAGE_USAGE));
+        }
     }
 
 }

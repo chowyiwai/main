@@ -11,9 +11,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
-import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
 import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UnblockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
 import seedu.address.logic.commands.datamanagement.FindModuleCommand;
@@ -31,25 +31,28 @@ import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
+import seedu.address.logic.commands.storage.AddSemesterCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
 import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
-import seedu.address.logic.commands.storage.DeleteCommand;
 import seedu.address.logic.commands.storage.DeleteCommitCommand;
 import seedu.address.logic.commands.storage.DeleteSemesterCommand;
+import seedu.address.logic.commands.storage.DeleteStudyPlanCommand;
 import seedu.address.logic.commands.storage.EditTitleCommand;
 import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
+import seedu.address.logic.commands.storage.ViewStudyPlanCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
+import seedu.address.logic.commands.verification.ClearInvalidModsCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.logic.parser.cli.AddModuleParser;
 import seedu.address.logic.parser.cli.BlockCurrentSemesterParser;
 import seedu.address.logic.parser.cli.DeleteModuleFromSemesterParser;
-import seedu.address.logic.parser.cli.NameUeFromSemesterParser;
 import seedu.address.logic.parser.cli.SetCurrentSemesterParser;
+import seedu.address.logic.parser.cli.UnblockCurrentSemesterCommandParser;
 import seedu.address.logic.parser.datamanagement.DeleteTagCommandParser;
 import seedu.address.logic.parser.datamanagement.FindModuleCommandParser;
 import seedu.address.logic.parser.datamanagement.RemoveTagFromAllCommandParser;
@@ -63,6 +66,7 @@ import seedu.address.logic.parser.datamanagement.ViewTaggedCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.gui.HelpCommandParser;
 import seedu.address.logic.parser.storage.ActivateStudyPlanParser;
+import seedu.address.logic.parser.storage.AddSemesterCommandParser;
 import seedu.address.logic.parser.storage.CommitStudyPlanEditsParser;
 import seedu.address.logic.parser.storage.CreateStudyPlanCommandParser;
 import seedu.address.logic.parser.storage.DeleteCommitCommandParser;
@@ -72,6 +76,7 @@ import seedu.address.logic.parser.storage.EditStudyPlanTitleParser;
 import seedu.address.logic.parser.storage.ListAllStudyPlansParser;
 import seedu.address.logic.parser.storage.RevertCommitParser;
 import seedu.address.logic.parser.storage.ViewCommitCommandParser;
+import seedu.address.logic.parser.storage.ViewStudyPlanCommandParser;
 import seedu.address.logic.parser.verification.DescriptionCommandParser;
 import seedu.address.logic.parser.verification.ValidModsCommandParser;
 
@@ -112,8 +117,8 @@ public class ModulePlannerParser {
         case DeleteModuleCommand.COMMAND_WORD:
             return new DeleteModuleFromSemesterParser().parse(arguments);
 
-        case NameUeFromSemesterCommand.COMMAND_WORD:
-            return new NameUeFromSemesterParser().parse(arguments);
+        case UnblockCurrentSemesterCommand.COMMAND_WORD:
+            return new UnblockCurrentSemesterCommandParser().parse(arguments);
 
         case SetCurrentSemesterCommand.COMMAND_WORD:
             return new SetCurrentSemesterParser().parse(arguments);
@@ -133,10 +138,13 @@ public class ModulePlannerParser {
         case CheckCommand.COMMAND_WORD:
             return new CheckCommand();
 
+        case ClearInvalidModsCommand.COMMAND_WORD:
+            return new ClearInvalidModsCommand();
+
         case CreateStudyPlanCommand.COMMAND_WORD:
             return new CreateStudyPlanCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteStudyPlanCommand.COMMAND_WORD:
             return new DeleteStudyPlanParser().parse(arguments);
 
         case TagModuleCommand.COMMAND_WORD:
@@ -216,6 +224,12 @@ public class ModulePlannerParser {
 
         case TagStudyPlanCommand.COMMAND_WORD:
             return new TagStudyPlanCommandParser().parse(arguments);
+
+        case ViewStudyPlanCommand.COMMAND_WORD:
+            return new ViewStudyPlanCommandParser().parse(arguments);
+
+        case AddSemesterCommand.COMMAND_WORD:
+            return new AddSemesterCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

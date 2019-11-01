@@ -13,6 +13,8 @@ import seedu.address.model.semester.SemesterName;
  */
 public class BlockCurrentSemesterCommand extends Command {
     public static final String COMMAND_WORD = "block";
+    public static final String HELP_MESSAGE = COMMAND_WORD
+            + ": Block off the given semester, for reasons such as exchange, LOA, etc.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Block off the given semester, for reasons such as exchange, LOA, etc.\n. "
             + "Parameters: "
@@ -32,9 +34,14 @@ public class BlockCurrentSemesterCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getSemester(sem).isBlocked()) {
+            throw new CommandException("Semester is already blocked");
+        }
+
         model.blockSemester(sem, reason);
         model.addToHistory();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, sem));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sem), true, false);
     }
 
     @Override

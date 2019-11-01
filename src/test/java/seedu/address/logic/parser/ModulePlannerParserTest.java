@@ -13,17 +13,19 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
-import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
 import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UnblockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
 import seedu.address.logic.commands.datamanagement.FindModuleCommand;
 import seedu.address.logic.commands.datamanagement.RemoveAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
+import seedu.address.logic.commands.datamanagement.RemoveTagFromStudyPlanCommand;
 import seedu.address.logic.commands.datamanagement.RenameTagCommand;
 import seedu.address.logic.commands.datamanagement.TagModuleCommand;
+import seedu.address.logic.commands.datamanagement.TagStudyPlanCommand;
 import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
@@ -32,9 +34,9 @@ import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
 import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
-import seedu.address.logic.commands.storage.DeleteCommand;
 import seedu.address.logic.commands.storage.DeleteCommitCommand;
 import seedu.address.logic.commands.storage.DeleteSemesterCommand;
+import seedu.address.logic.commands.storage.DeleteStudyPlanCommand;
 import seedu.address.logic.commands.storage.EditTitleCommand;
 import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
@@ -99,10 +101,10 @@ public class ModulePlannerParserTest {
     }
 
     @Test
-    public void parseCommand_nameUeFromSemester() throws Exception {
-        NameUeFromSemesterCommand command = new NameUeFromSemesterCommand(VALID_MODULE_CODE, VALID_SEMESTER_NAME);
-        assertEquals(parser.parseCommand(NameUeFromSemesterCommand.COMMAND_WORD + " "
-                + VALID_SEMESTER + " " + VALID_MODULE_CODE), command);
+    public void parseCommand_unblockSemester() throws Exception {
+        UnblockCurrentSemesterCommand command = new UnblockCurrentSemesterCommand(VALID_SEMESTER_NAME);
+        assertEquals(parser.parseCommand(UnblockCurrentSemesterCommand.COMMAND_WORD + " "
+                + VALID_SEMESTER), command);
     }
 
     // =================== TAG ===================
@@ -169,9 +171,31 @@ public class ModulePlannerParserTest {
         assertEquals(new FindModuleCommand("CS2030"), command);
     }
 
+    @Test
     public void parseCommand_removeAllTags() throws Exception {
         assertTrue(parser.parseCommand(RemoveAllTagsCommand.COMMAND_WORD) instanceof RemoveAllTagsCommand);
     }
+
+    @Test
+    public void parseCommand_tagStudyPlan() throws Exception {
+        TagStudyPlanCommand command = (TagStudyPlanCommand)
+                parser.parseCommand(TagStudyPlanCommand.COMMAND_WORD + " " + "HIGH" + " " + 1);
+        assertEquals(new TagStudyPlanCommand("HIGH", 1), command);
+        TagStudyPlanCommand command2 = (TagStudyPlanCommand)
+                parser.parseCommand(TagStudyPlanCommand.COMMAND_WORD + " " + "MEDIUM" + " " + 2);
+        assertEquals(new TagStudyPlanCommand("MEDIUM", 2), command2);
+    }
+
+    @Test
+    public void parseCommand_removeTagFromStudyPlan() throws Exception {
+        RemoveTagFromStudyPlanCommand command = (RemoveTagFromStudyPlanCommand)
+                parser.parseCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD + " " + "HIGH" + " " + 1);
+        assertEquals(new RemoveTagFromStudyPlanCommand("HIGH", 1), command);
+        RemoveTagFromStudyPlanCommand command2 = (RemoveTagFromStudyPlanCommand)
+                parser.parseCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD + " " + "MEDIUM" + " " + 2);
+        assertEquals(new RemoveTagFromStudyPlanCommand("MEDIUM", 2), command2);
+    }
+
     // =================== GUI ===================
 
     @Test
@@ -189,8 +213,8 @@ public class ModulePlannerParserTest {
 
     @Test
     public void parseCommand_deleteStudyPlan() throws Exception {
-        DeleteCommand command = new DeleteCommand(Index.fromZeroBased(1));
-        assertEquals(parser.parseCommand(DeleteCommand.COMMAND_WORD + " " + 1), command);
+        DeleteStudyPlanCommand command = new DeleteStudyPlanCommand(Index.fromZeroBased(1));
+        assertEquals(parser.parseCommand(DeleteStudyPlanCommand.COMMAND_WORD + " " + 1), command);
     }
 
     @Test

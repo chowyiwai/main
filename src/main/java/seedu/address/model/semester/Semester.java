@@ -31,13 +31,14 @@ public class Semester implements Cloneable {
      * This constructor is for {@code JsonAdaptedSemester} to create a semester with skeletal modules inside.
      */
     public Semester(SemesterName semesterName, boolean isBlocked,
-                    String reasonForBlocked, List<Module> modules) {
+                    String reasonForBlocked, List<Module> modules, boolean isExpanded) {
         this.semesterName = semesterName;
         this.isBlocked = isBlocked;
         this.reasonForBlocked = reasonForBlocked;
         for (Module module : modules) {
             this.modules.add(module);
         }
+        this.isExpanded = isExpanded;
     }
 
     @Override
@@ -73,14 +74,6 @@ public class Semester implements Cloneable {
         this.reasonForBlocked = reasonForBlocked;
     }
 
-    public boolean isExpanded() {
-        return isExpanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        isExpanded = expanded;
-    }
-
     public int getMcCount() {
         return modules.getMcCount();
     }
@@ -95,6 +88,14 @@ public class Semester implements Cloneable {
 
     public boolean hasModule(String module) {
         return this.modules.contains(module);
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 
     /**
@@ -117,7 +118,6 @@ public class Semester implements Cloneable {
         return result.toString();
     }
 
-    // Added this method to display a simplified list of semesters for commands like viewplan/viewcommit.
 
     /**
      * Converts this semester to a String suitable for display in a simplified study plan.
@@ -136,11 +136,15 @@ public class Semester implements Cloneable {
             return true;
         } else if (obj instanceof Semester) {
             Semester other = (Semester) obj;
-            return this.modules.equals(other.getModules())
+            return this.semesterName == other.getSemesterName(); // so that no two semesters can have the same name
+            /*
+                    this.modules.equals(other.getModules())
                     && this.isBlocked == other.isBlocked
-                    && (this.reasonForBlocked == null ? true : this.reasonForBlocked.equals(other.reasonForBlocked))
+                    && (this.reasonForBlocked == null || this.reasonForBlocked.equals(other.reasonForBlocked))
                     && this.isExpanded == other.isExpanded
                     && this.semesterName == other.getSemesterName();
+
+             */
         }
         return false;
     }
