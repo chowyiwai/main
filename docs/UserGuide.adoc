@@ -304,6 +304,7 @@ Examples:
 * `addmod y1s1 CS1101S CS1231 MA1521`
 * `movemodule CS2105 y2s1 y2s2 && addmod CS2106 y2s2`
 
+//tag::dataclassificationandmanagement[]
 === Data classification and management
 ==== Viewing default tags : `viewdefaulttags`
 Shows all default tag types. +
@@ -416,11 +417,7 @@ Examples:
 
 ==== Adding priority tags to a study plan : `tagplan`
 Attaches a priority tag to the study plan. +
-<<<<<<< HEAD
-Format: `tagplan PRIORITY_LEVEL STUDY_PLAN_INDEX`
-=======
 Format: `tagplan PRIORITY_LEVEL STUDY_PLAN_ID`
->>>>>>> master
 
 ****
 List of priority levels:
@@ -437,11 +434,7 @@ Examples:
 
 ==== Removing priority tags from study plan: `removeplantag`
 Removes the priority tag from the study plan. +
-<<<<<<< HEAD
-Format: `removeplantag PRIORITY_LEVEL STUDY_PLAN_INDEX`
-=======
 Format: `removeplantag PRIORITY_LEVEL STUDY_PLAN_ID`
->>>>>>> master
 
 Examples
 
@@ -451,6 +444,8 @@ Examples
 ==== Listing study plans by priority: `listbypriority`
 Lists all study plans in the order of their priorities. +
 Format: `listbypriority`
+
+//end::dataclassificationandmanagement[]
 
 === Verification
 

@@ -31,7 +31,6 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
 import seedu.address.model.tag.exceptions.InvalidTagException;
 import seedu.address.model.tag.exceptions.InvalidTagModificationException;
-import seedu.address.model.tag.exceptions.InvalidTagNameException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
