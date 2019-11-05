@@ -332,6 +332,21 @@ _E_ modules are modules that count towards Focus Area Electives for _FOCUS_AREA_
 Shows all tag types. +
 Format: `viewallmodtags`
 
+==== Tagging modules : `tagmod`
+Attaches a tag to a module. +
+Format: `tagmod MODULE_CODE TAG_NAME`
+
+[TIP]
+If a tag with the given `TAG_NAME` does not exist, a new tag will automatically be created and tagged to the specified module.
+
+[IMPORTANT]
+All tag names must be single words and cannot be more than 25 characters long.
+
+Example:
+
+* `tagmod cs3230 exchange` +
+Attaches the tag with name _exchange_ to _CS3230_.
+
 ==== Renaming an existing tag : `renamemodtag`
 Renames a tag. +
 Format: `renamemodtag ORIGINAL_TAG_NAME NEW_TAG_NAME`
@@ -343,18 +358,6 @@ Example:
 
 * `renamemodtag exchange sep` +
 Renames the tag name from _exchange_ to _sep_.
-
-==== Tagging modules : `tagmod`
-Attaches a tag to a module. +
-Format: `tagmod MODULE_CODE TAG_NAME`
-
-[TIP]
-If a tag with the given `TAG_NAME` does not exist, a new tag will automatically be created and tagged to the specified module.
-
-Example:
-
-* `tagmod cs3230 exchange` +
-Attaches the tag with name _exchange_ to _CS3230_.
 
 ==== Removing a tag from a module: `removemodtag`
 Removes a tag from a module. +
@@ -444,6 +447,24 @@ Examples
 ==== Listing study plans by priority: `listbypriority`
 Lists all study plans in the order of their priorities. +
 Format: `listbypriority`
+
+==== Setting focus area tags to study plans: `[coming in v2.0]`
+A tag with the declared focus area will automatically appear when the user declares his/her focus area. +
+Refer to <<Declaring a focus area: `[coming in v2.0]`>>.
+
+==== Change colour theme of tags: `[coming in v2.0]`
+Changes the colour theme of all the tags in the study plan with the specified one.
+
+==== Change colour of specific tags: `[coming in v2.0]`
+Changes the colour of a specific tag.
+
+==== Get module codes from keywords: `[coming in v2.0]`
+Shows all module codes of modules with names containing the specified keywords.
+
+==== Tagging modules across all study plans: `[coming in v2.0]`
+Attaches a specified tag to a module across all study plans. For example, a tag `difficult` can be attached to a
+given module across all study plans instead of tagging them individually in every study plan.
+
 
 //end::dataclassificationandmanagement[]
 

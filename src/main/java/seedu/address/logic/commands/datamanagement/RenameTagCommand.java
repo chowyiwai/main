@@ -10,7 +10,6 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
-import seedu.address.model.tag.exceptions.InvalidTagNameException;
 
 /**
  * Renames a tag
@@ -70,13 +69,9 @@ public class RenameTagCommand extends Command {
             }
             model.replaceTagInActiveSp(toRename, replacement);
         } else {
-            try {
-                toRename.rename(newTagName);
-                UniqueTagList modelTags = model.getModuleTagsFromActiveSp();
-                modelTags.updateTagMaps(originalTagName, newTagName);
-            } catch (InvalidTagNameException exception) {
-                throw new CommandException(MESSAGE_INVALID_TAG_NAME);
-            }
+            toRename.rename(newTagName);
+            UniqueTagList modelTags = model.getModuleTagsFromActiveSp();
+            modelTags.updateTagMaps(originalTagName, newTagName);
         }
         model.addToHistory();
 
