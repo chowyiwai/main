@@ -104,7 +104,7 @@ public class HelpCommandTest {
 
         expectedCommandResult = new CommandResult(RemoveTagFromModuleCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RemoveTagFromModuleCommand.COMMAND_WORD).execute(model), expectedCommandResult);
-        
+
         expectedCommandResult = new CommandResult(RemoveTagFromStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
 
