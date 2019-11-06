@@ -1,3 +1,5 @@
+//@@author andyylam
+
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -28,6 +30,7 @@ import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
+import seedu.address.logic.commands.gui.ChangeThemeCommand;
 import seedu.address.logic.commands.gui.CollapseAllCommand;
 import seedu.address.logic.commands.gui.CollapseCommand;
 import seedu.address.logic.commands.gui.ExpandAllCommand;
@@ -66,12 +69,13 @@ import seedu.address.logic.parser.datamanagement.TagStudyPlanCommandParser;
 import seedu.address.logic.parser.datamanagement.ViewModuleTagsCommandParser;
 import seedu.address.logic.parser.datamanagement.ViewTaggedCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.gui.ChangeThemeCommandParser;
 import seedu.address.logic.parser.gui.CollapseCommandParser;
 import seedu.address.logic.parser.gui.ExpandCommandParser;
 import seedu.address.logic.parser.gui.HelpCommandParser;
 import seedu.address.logic.parser.storage.ActivateStudyPlanParser;
 import seedu.address.logic.parser.storage.AddSemesterCommandParser;
-import seedu.address.logic.parser.storage.CommitStudyPlanEditsParser;
+import seedu.address.logic.parser.storage.CommitStudyPlanCommandParser;
 import seedu.address.logic.parser.storage.CreateStudyPlanCommandParser;
 import seedu.address.logic.parser.storage.DeleteCommitCommandParser;
 import seedu.address.logic.parser.storage.DeleteSemesterCommandParser;
@@ -137,7 +141,7 @@ public class ModulePlannerParser {
             return new ValidModsCommandParser().parse(arguments);
 
         case CommitStudyPlanCommand.COMMAND_WORD:
-            return new CommitStudyPlanEditsParser().parse(arguments);
+            return new CommitStudyPlanCommandParser().parse(arguments);
 
         case CheckCommand.COMMAND_WORD:
             return new CheckCommand();
@@ -243,6 +247,9 @@ public class ModulePlannerParser {
 
         case CollapseAllCommand.COMMAND_WORD:
             return new CollapseAllCommand();
+
+        case ChangeThemeCommand.COMMAND_WORD:
+            return new ChangeThemeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
