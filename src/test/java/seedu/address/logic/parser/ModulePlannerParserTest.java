@@ -23,7 +23,6 @@ import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
 import seedu.address.logic.commands.datamanagement.FindModuleCommand;
 import seedu.address.logic.commands.datamanagement.RemoveAllTagsCommand;
-import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromStudyPlanCommand;
 import seedu.address.logic.commands.datamanagement.RenameTagCommand;
@@ -118,12 +117,6 @@ public class ModulePlannerParserTest {
     public void parseCommand_deleteTag() throws Exception {
         DeleteTagCommand command = new DeleteTagCommand(VALID_TAG_1);
         assertEquals(parser.parseCommand(DeleteTagCommand.COMMAND_WORD + " " + VALID_TAG_1), command);
-    }
-
-    @Test
-    public void parseCommand_removeTagFromAll() throws Exception {
-        RemoveTagFromAllCommand command = new RemoveTagFromAllCommand(VALID_TAG_1);
-        assertEquals(parser.parseCommand(RemoveTagFromAllCommand.COMMAND_WORD + " " + VALID_TAG_1), command);
     }
 
     @Test

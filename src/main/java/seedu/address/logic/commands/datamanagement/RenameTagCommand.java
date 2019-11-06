@@ -16,7 +16,7 @@ import seedu.address.model.tag.UserTag;
  */
 public class RenameTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "renamemodtag";
+    public static final String COMMAND_WORD = "renametag";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": Renaming an existing tag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Renames the tag with the specified original name "
             + "with the specified new name. "

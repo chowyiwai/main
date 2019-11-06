@@ -16,7 +16,7 @@ import seedu.address.model.tag.PriorityTagType;
  */
 public class RemoveTagFromStudyPlanCommand extends Command {
 
-    public static final String COMMAND_WORD = "removeplantag";
+    public static final String COMMAND_WORD = "removepriority";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": Removing a tag from a study plan";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Removes the tag of the specified priority "
             + "(high, medium, low) "
