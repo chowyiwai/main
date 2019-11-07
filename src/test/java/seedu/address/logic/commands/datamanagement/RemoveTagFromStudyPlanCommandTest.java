@@ -77,7 +77,7 @@ public class RemoveTagFromStudyPlanCommandTest {
 
         // construct command to add a priority tag to a non-existent study plan
         RemoveTagFromStudyPlanCommand removeTagFromStudyPlanCommand =
-                new RemoveTagFromStudyPlanCommand( 3);
+                new RemoveTagFromStudyPlanCommand(3);
         assertThrows(CommandException.class, () -> removeTagFromStudyPlanCommand.execute(model),
                 RemoveTagFromStudyPlanCommand.MESSAGE_NO_SUCH_STUDYPLAN);
     }

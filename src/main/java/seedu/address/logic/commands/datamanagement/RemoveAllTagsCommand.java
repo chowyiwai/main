@@ -22,7 +22,7 @@ public class RemoveAllTagsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Removes all user-created tags from all modules "
             + "Example: "
-            + "removeallmodtags";
+            + "removealltags";
 
     public static final String MESSAGE_SUCCESS = "All the tags that you have created have been removed from "
             + "all modules";

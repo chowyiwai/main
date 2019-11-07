@@ -24,7 +24,7 @@ public class RenameTagCommand extends Command {
             + "ORIGINAL_TAG_NAME "
             + "NEW_TAG_NAME \n"
             + "Example: "
-            + "renamemodtag exchange SEP";
+            + "renametag exchange SEP";
 
     public static final String MESSAGE_SUCCESS = "Tag [%1$s] renamed to [%2$s]";
     public static final String MESSAGE_TAG_NOT_FOUND = "There is no [%1$s] tag in this study plan";

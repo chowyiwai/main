@@ -22,7 +22,7 @@ public class TagModuleCommand extends Command {
             + "MODULE CODE "
             + "TAG_NAME \n"
             + "Example: "
-            + "tagmod CS3230 exchange";
+            + "addtag CS3230 exchange";
 
     public static final String MESSAGE_SUCCESS_TAG_CREATED = "A new tag %1$s has been created and added to module %2$s";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "This module does not exist.";

@@ -20,7 +20,7 @@ public class DeleteTagCommand extends Command {
             + "Parameters: "
             + "TAG_NAME \n"
             + "Example: "
-            + "deletemodtag exchange";
+            + "deletetag exchange";
 
     public static final String MESSAGE_SUCCESS = "Tag %1$s has been deleted";
     public static final String MESSAGE_TAG_NOT_FOUND = "There is no [%1$s] tag in this study plan";
