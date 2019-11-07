@@ -353,7 +353,6 @@ Format: `default`
 
 //tag::dataclassificationandmanagement3[]
 
->>>>>>> master
 ==== Adding priority tags to a study plan : `setpriority`
 Attaches a priority tag to the study plan. +
 Format: `setpriority PRIORITY_LEVEL STUDY_PLAN_ID`
