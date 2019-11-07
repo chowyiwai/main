@@ -177,6 +177,10 @@ Example:
 
 //tag::dataclassificationandmanagement2[]
 === Tagging
+
+[IMPORTANT]
+All tag names must be single words and cannot be more than 25 characters long.
+
 ==== Viewing default tags : `viewdefaulttags`
 Shows all default tag types. +
 Format: `viewdefaulttags`
@@ -205,9 +209,6 @@ Format: `addtag MODULE_CODE TAG_NAME`
 
 [TIP]
 If a tag with the given `TAG_NAME` does not exist, a new tag will automatically be created and tagged to the specified module.
-
-[IMPORTANT]
-All tag names must be single words and cannot be more than 25 characters long.
 
 Example:
 
