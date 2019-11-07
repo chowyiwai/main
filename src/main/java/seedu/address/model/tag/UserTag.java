@@ -13,7 +13,7 @@ public class UserTag implements Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tag names should not be more than 25 characters long"
             + " and should not be default tag names";
-    public static final String VALIDATION_REGEX = "\\p{ASCII}{1," + 25 + "}";
+    public static final String VALIDATION_REGEX = "^(\\S+){1,25}$";
 
     private String tagName;
 
