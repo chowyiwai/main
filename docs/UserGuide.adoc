@@ -86,15 +86,14 @@ Redo the previous undone command. The state of the application will revert back 
 
 Format:  `redo`
 
-// tag::undoredo[] 
+// tag::undoredo[]
 
 ==== Error messages
 Displays a useful error message if the input is invalid. For example,
 it should highlight wrong commands, wrong numbers of arguments, or arguments in the wrong format.
 
+// tag::addremovemod[]
 === Module
-
-// tag::addremovemod[] 
 
 ==== Assigning a module to a given semester: `addmod`
 Assigns the specified module to a given semester of the current study plan. +
@@ -286,6 +285,7 @@ Format: `removeallmodtags`
 
 //end::dataclassificationandmanagement2[]
 
+// tag::studyplan[]
 === Study Plan
 
 ==== Creating a new study plan: `newplan`
@@ -349,7 +349,11 @@ Example:
 Generates a study plan with pre-populated modules according to the recommended study plan for a Year one CS student. +
 Format: `default`
 
+// end::studyplan[]
+
 //tag::dataclassificationandmanagement3[]
+
+>>>>>>> master
 ==== Adding priority tags to a study plan : `setpriority`
 Attaches a priority tag to the study plan. +
 Format: `setpriority PRIORITY_LEVEL STUDY_PLAN_ID`
@@ -391,6 +395,7 @@ Clears all modules that are currently invalid, whose prerequisites have not been
 This may cause other modules in future semesters to be invalidated as well. +
 Format: `clearinvalidmods`
 
+// tag::versiontracking[]
 === Version Tracking
 
 ==== Committing edits to a study plan: `commit`
@@ -446,6 +451,8 @@ Example:
 
 * `removecommit 2.2`
 
+// end::versiontracking[]
+
 === GUI
 
 ==== Expanding a semester: `expand`
@@ -494,6 +501,8 @@ Examples:
 * `addmod y1s1 CS1101S CS1231 MA1521`
 * `movemodule CS2105 y2s1 y2s2 && addmod CS2106 y2s2`
 
+// tag::movingasemester[]
+
 === Semester
 
 ==== Moving a semester to a study plan: `movesem` `[coming in v2.0]`
@@ -504,6 +513,8 @@ Examples:
 
 * `movesem y2s2 1 3`
 * `movesem y3s1 2 1`
+
+// end::movingasemester[]
 
 === Module
 
