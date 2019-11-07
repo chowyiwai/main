@@ -21,11 +21,10 @@ public class RemoveTagFromStudyPlanCommandParser implements Parser<RemoveTagFrom
      */
     public RemoveTagFromStudyPlanCommand parse(String args) throws ParseException {
         String[] tokens = args.trim().split(" ");
-        if (tokens.length < 2 || !PriorityTagType.isValidPriorityTagString(tokens[0])
-                || !tokens[1].matches("\\d")) {
+        if (tokens.length < 1 || !tokens[0].matches("\\d")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemoveTagFromStudyPlanCommand.MESSAGE_USAGE));
         }
-        return new RemoveTagFromStudyPlanCommand(tokens[0].toUpperCase(), Integer.parseInt(tokens[1]));
+        return new RemoveTagFromStudyPlanCommand(Integer.parseInt(tokens[0]));
     }
 }

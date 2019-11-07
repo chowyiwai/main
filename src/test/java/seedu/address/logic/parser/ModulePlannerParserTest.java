@@ -190,11 +190,11 @@ public class ModulePlannerParserTest {
     @Test
     public void parseCommand_removeTagFromStudyPlan() throws Exception {
         RemoveTagFromStudyPlanCommand command = (RemoveTagFromStudyPlanCommand)
-                parser.parseCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD + " " + "HIGH" + " " + 1);
-        assertEquals(new RemoveTagFromStudyPlanCommand("HIGH", 1), command);
+                parser.parseCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD + " " + 1);
+        assertEquals(new RemoveTagFromStudyPlanCommand(1), command);
         RemoveTagFromStudyPlanCommand command2 = (RemoveTagFromStudyPlanCommand)
-                parser.parseCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD + " " + "MEDIUM" + " " + 2);
-        assertEquals(new RemoveTagFromStudyPlanCommand("MEDIUM", 2), command2);
+                parser.parseCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD + " " + 2);
+        assertEquals(new RemoveTagFromStudyPlanCommand(2), command2);
     }
 
     // =================== GUI ===================
