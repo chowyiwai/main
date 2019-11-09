@@ -63,13 +63,14 @@ image::LogicClassDiagram.png[]
 ==== How the architecture components interact with each other
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues
-the command `addmod y1s1 cs1231s`.
+the command `addmod y1s1 CS3244`.
 
-.Component interactions for the `addmod y1s1 cs1231s` command
+.Component interactions for the `addmod y1s1 CS3244` command
 image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
 
+// tag::Ui[]
 [[Design-Ui]]
 === UI component
 
@@ -87,8 +88,9 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the UI can be updated with the modified data. 
+* Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
+// end::Ui[]
 // tag::logic[]
 
 [[Design-Logic]]
@@ -107,7 +109,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-// end::logic[] 
+//end::logic[]
 
 [[Design-Model]]
 === Model component
@@ -226,7 +228,8 @@ image::UndoRedoState4.png[]
 * **Alternative 2:** Implement redo/undo for every single command.
 ** Pros: Will use less memory (e.g. for `removemod`, just save the person being deleted).
 ** Cons: Tedious because there are a lot of commands and we must ensure that the implementation of each individual command are correct.
-// end::undoredo[]
+
+//end::undoredo[]
 
 // tag::versiontracking[]
 === Version Tracking
@@ -503,6 +506,7 @@ the necessary information.
 
 //end::moduleinformationandverification[]
 
+// tag::autocomplete[]
 === Autocomplete
 
 ==== Implementation
@@ -626,6 +630,7 @@ take more time and alter the structure of parsing commands.
 ** Cons: The command will have to be parsed upon autocomplete call, which will
 take more time and alter the structure of parsing commands.
 
+// end::autocomplete[]
 == Documentation
 
 Refer to the guide <<Documentation#, here>>.
@@ -653,7 +658,7 @@ Refer to the guide <<DevOps#, here>>.
 * Prefers typing over mouse input
 * Is reasonably comfortable using CLI apps
 
-// end::userprofile[]
+//end::userprofile[]
 
 // tag::valueproposition[]
 
@@ -666,7 +671,7 @@ Refer to the guide <<DevOps#, here>>.
 * Version control for saving history of study plans, ensuring that mistakes or past study plans are recoverable.
 * Suits users who are able to type fast and can manage their study plan faster.
 
-// end::valueproposition[]
+//end::valueproposition[]
 
 [appendix]
 // tag::userstories[]
@@ -723,7 +728,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
-// end::userstories[]
+//end::userstories[]
 
 [appendix]
 == Use Cases
