@@ -166,6 +166,21 @@ public class RenameTagCommandTest {
     }
 
     @Test
+    public void execute_renameToSameName_throwsCommandException() {
+               // construct model containing study plan
+        StudyPlan studyPlan = new StudyPlanBuilder().withModuleTags(validTagOne).build();
+        Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
+                new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
+        model.activateFirstStudyPlan();
+
+        // construct command to rena
+        // me one of the default tags
+        RenameTagCommand renameTagCommand = new RenameTagCommand(validTagOne.getTagName(), validTagOne.getTagName());
+        assertThrows(CommandException.class, () -> renameTagCommand.execute(model),
+                RenameTagCommand.MESSAGE_SAME_TAG_NAME);
+    }
+
+    @Test
     public void execute_renameToDefaultTagName_throwsCommandException() {
         String defaultTagName = new TagBuilder().buildDefaultCoreTag().getTagName();
 

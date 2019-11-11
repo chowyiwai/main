@@ -289,7 +289,9 @@ Renames a tag. +
 Format: `renametag ORIGINAL_TAG_NAME NEW_TAG_NAME`
 
 [NOTE]
-Only user-created tags can be renamed, i.e. default tag cannot be renamed.
+Only user-created tags can be renamed, i.e. default tag cannot be renamed. Also, `renametag` currently does not support
+renaming tags to names that differ only in letter case, i.e. if the new tag name is the same as the old tag name, it will not be renamed.
+This will be done in v2.0.
 
 Example:
 
@@ -585,8 +587,7 @@ Examples:
 
 // tag::datafour[]
 ==== Setting focus area tags to study plans: `[coming in v2.0]`
-A tag with the declared focus area will automatically appear when the user declares his/her focus area. +
-Refer to <<Declaring a focus area: `[coming in v2.0]`>>.
+A tag with the declared focus area will automatically appear when the user declares his/her focus area.
 
 ==== Get module codes from keywords: `[coming in v2.0]`
 Shows all module codes of modules with names containing the specified keywords.

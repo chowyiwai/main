@@ -31,6 +31,7 @@ public class RenameTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Tag [%1$s] renamed to [%2$s]";
     public static final String MESSAGE_TAG_NOT_FOUND = "There is no [%1$s] tag in this study plan";
+    public static final String MESSAGE_SAME_TAG_NAME = "[%1$s] and [%2$s] are the same.";
     public static final String MESSAGE_INVALID_DEFAULT_TAG_MODIFICATION = "Default tags cannot be renamed";
     public static final String MESSAGE_INVALID_TAG_NAME = "You cannot rename a tag to a default tag name";
 
@@ -68,6 +69,10 @@ public class RenameTagCommand extends Command {
         UserTag toRename = (UserTag) targetTag;
 
         logger.info("Found " + toRename + " in active study plan");
+
+        if (originalTagName.compareToIgnoreCase(newTagName) == 0) {
+            throw new CommandException(MESSAGE_SAME_TAG_NAME);
+        }
 
         if (model.activeSpContainsModuleTag(newTagName)) {
             Tag replacement = model.getModuleTagFromActiveSp(newTagName);
