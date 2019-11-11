@@ -129,8 +129,7 @@ Examples:
 // tag::dataone[]
 ==== Finding modules using module code: `findmod`
 Shows the semester that the specified module is located at. +
-Format: `findmod MODULE_CODE`
-
+Format: `findmod MODULE_CODE` +
 Examples:
 
 * `findmod cs1101s`
@@ -321,6 +320,7 @@ Examples:
 Removes all user-created tags in the entire study plan. +
 Format: `removealltags`
 // end::datatwo[]
+
 // tag::studyplan[]
 === Study Plan
 
