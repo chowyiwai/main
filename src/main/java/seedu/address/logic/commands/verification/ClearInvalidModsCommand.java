@@ -26,10 +26,6 @@ public class ClearInvalidModsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.getActiveStudyPlan() == null) {
-            throw new CommandException(MESSAGE_NO_STUDY_PLAN);
-        }
-
         int numCleared = model.clearInvalidMods();
         if (numCleared > 0) {
             model.addToHistory();
