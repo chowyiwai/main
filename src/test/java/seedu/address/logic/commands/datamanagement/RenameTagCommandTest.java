@@ -167,14 +167,13 @@ public class RenameTagCommandTest {
 
     @Test
     public void execute_renameToSameName_throwsCommandException() {
-               // construct model containing study plan
+        // construct model containing study plan with one tag
         StudyPlan studyPlan = new StudyPlanBuilder().withModuleTags(validTagOne).build();
         Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
                 new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
         model.activateFirstStudyPlan();
 
-        // construct command to rena
-        // me one of the default tags
+        // construct command to rename tag to same name
         RenameTagCommand renameTagCommand = new RenameTagCommand(validTagOne.getTagName(), validTagOne.getTagName());
         assertThrows(CommandException.class, () -> renameTagCommand.execute(model),
                 RenameTagCommand.MESSAGE_SAME_TAG_NAME);
