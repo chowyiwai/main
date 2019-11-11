@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.verification;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_NO_STUDY_PLAN;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
