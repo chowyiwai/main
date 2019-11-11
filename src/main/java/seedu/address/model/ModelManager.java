@@ -19,6 +19,7 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
 import seedu.address.model.semester.UniqueSemesterList;
+import seedu.address.model.semester.exceptions.SemesterNotFoundException;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.studyplan.exceptions.StudyPlanNotFoundException;
 import seedu.address.model.tag.PriorityTag;
@@ -51,10 +52,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudyPlans = new FilteredList<>(this.modulePlanner.getStudyPlanList());
     }
-
-    //    public ModelManager() {
-    //        this(new ModulePlanner(), new UserPrefs());
-    //    }
 
     //=========== UserPrefs ==================================================================================
 
@@ -116,6 +113,7 @@ public class ModelManager implements Model {
 
     @Override
     public StudyPlan activateStudyPlan(int index) throws StudyPlanNotFoundException {
+        logger.info("Activating study plan with ID: " + index);
         return modulePlanner.activateStudyPlan(index);
     }
 
@@ -126,11 +124,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteStudyPlan(StudyPlan target) {
+        logger.info("Deleting study plan with ID: " + target.getIndex());
         modulePlanner.removeStudyPlan(target);
     }
 
     @Override
     public void addStudyPlan(StudyPlan studyPlan) {
+        logger.info("Adding new study plan with ID: " + studyPlan.getIndex());
         modulePlanner.addStudyPlan(studyPlan);
         updateFilteredStudyPlanList(PREDICATE_SHOW_ALL_STUDY_PLANS);
     }
@@ -157,7 +157,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteSemester(SemesterName semesterName) {
+    public void deleteSemester(SemesterName semesterName) throws SemesterNotFoundException {
         requireNonNull(semesterName);
 
         modulePlanner.deleteSemester(semesterName);
@@ -323,7 +323,8 @@ public class ModelManager implements Model {
     public void unblockSemester(SemesterName sem) {
         this.modulePlanner.getActiveStudyPlan().unblockSemester(sem);
     }
-    // ===================== TAGGING ==========================
+
+    // ===================== TAGGING ==========================================================================
 
     public boolean addModuleTagToActiveSp(UserTag tag, String moduleCode) {
         return modulePlanner.addTagToActiveSp(tag, moduleCode);

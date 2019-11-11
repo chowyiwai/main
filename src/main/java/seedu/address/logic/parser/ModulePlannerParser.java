@@ -23,6 +23,8 @@ import seedu.address.logic.commands.datamanagement.RemoveAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromStudyPlanCommand;
 import seedu.address.logic.commands.datamanagement.RenameTagCommand;
+import seedu.address.logic.commands.datamanagement.ShowCoreCommand;
+import seedu.address.logic.commands.datamanagement.ShowFocusCommand;
 import seedu.address.logic.commands.datamanagement.SortStudyPlansByPriorityTagCommand;
 import seedu.address.logic.commands.datamanagement.TagModuleCommand;
 import seedu.address.logic.commands.datamanagement.TagStudyPlanCommand;
@@ -73,18 +75,19 @@ import seedu.address.logic.parser.gui.ChangeThemeCommandParser;
 import seedu.address.logic.parser.gui.CollapseCommandParser;
 import seedu.address.logic.parser.gui.ExpandCommandParser;
 import seedu.address.logic.parser.gui.HelpCommandParser;
-import seedu.address.logic.parser.storage.ActivateStudyPlanParser;
+import seedu.address.logic.parser.storage.ActivateStudyPlanCommandParser;
 import seedu.address.logic.parser.storage.AddSemesterCommandParser;
 import seedu.address.logic.parser.storage.CommitStudyPlanCommandParser;
 import seedu.address.logic.parser.storage.CreateStudyPlanCommandParser;
 import seedu.address.logic.parser.storage.DeleteCommitCommandParser;
 import seedu.address.logic.parser.storage.DeleteSemesterCommandParser;
-import seedu.address.logic.parser.storage.DeleteStudyPlanParser;
-import seedu.address.logic.parser.storage.EditStudyPlanTitleParser;
-import seedu.address.logic.parser.storage.ListAllStudyPlansParser;
-import seedu.address.logic.parser.storage.RevertCommitParser;
+import seedu.address.logic.parser.storage.DeleteStudyPlanCommandParser;
+import seedu.address.logic.parser.storage.EditTitleCommandParser;
+import seedu.address.logic.parser.storage.ListAllStudyPlansCommandParser;
+import seedu.address.logic.parser.storage.RevertCommitCommandParser;
 import seedu.address.logic.parser.storage.ViewCommitCommandParser;
 import seedu.address.logic.parser.storage.ViewStudyPlanCommandParser;
+import seedu.address.logic.parser.verification.CheckCommandParser;
 import seedu.address.logic.parser.verification.DescriptionCommandParser;
 import seedu.address.logic.parser.verification.ValidModsCommandParser;
 
@@ -144,7 +147,7 @@ public class ModulePlannerParser {
             return new CommitStudyPlanCommandParser().parse(arguments);
 
         case CheckCommand.COMMAND_WORD:
-            return new CheckCommand();
+            return new CheckCommandParser().parse(arguments);
 
         case ClearInvalidModsCommand.COMMAND_WORD:
             return new ClearInvalidModsCommand();
@@ -153,7 +156,7 @@ public class ModulePlannerParser {
             return new CreateStudyPlanCommandParser().parse(arguments);
 
         case DeleteStudyPlanCommand.COMMAND_WORD:
-            return new DeleteStudyPlanParser().parse(arguments);
+            return new DeleteStudyPlanCommandParser().parse(arguments);
 
         case TagModuleCommand.COMMAND_WORD:
             return new TagModuleCommandParser().parse(arguments);
@@ -171,16 +174,16 @@ public class ModulePlannerParser {
             return new DeleteTagCommandParser().parse(arguments);
 
         case EditTitleCommand.COMMAND_WORD:
-            return new EditStudyPlanTitleParser().parse(arguments);
+            return new EditTitleCommandParser().parse(arguments);
 
         case ActivateStudyPlanCommand.COMMAND_WORD:
-            return new ActivateStudyPlanParser().parse(arguments);
+            return new ActivateStudyPlanCommandParser().parse(arguments);
 
         case ListAllStudyPlansCommand.COMMAND_WORD:
-            return new ListAllStudyPlansParser().parse(arguments);
+            return new ListAllStudyPlansCommandParser().parse(arguments);
 
         case RevertCommitCommand.COMMAND_WORD:
-            return new RevertCommitParser().parse(arguments);
+            return new RevertCommitCommandParser().parse(arguments);
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
@@ -250,6 +253,12 @@ public class ModulePlannerParser {
 
         case ChangeThemeCommand.COMMAND_WORD:
             return new ChangeThemeCommandParser().parse(arguments);
+
+        case ShowCoreCommand.COMMAND_WORD:
+            return new ShowCoreCommand();
+
+        case ShowFocusCommand.COMMAND_WORD:
+            return new ShowFocusCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
