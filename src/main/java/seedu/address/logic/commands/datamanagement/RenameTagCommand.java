@@ -3,6 +3,9 @@ package seedu.address.logic.commands.datamanagement;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,6 +33,8 @@ public class RenameTagCommand extends Command {
     public static final String MESSAGE_TAG_NOT_FOUND = "There is no [%1$s] tag in this study plan";
     public static final String MESSAGE_INVALID_DEFAULT_TAG_MODIFICATION = "Default tags cannot be renamed";
     public static final String MESSAGE_INVALID_TAG_NAME = "You cannot rename a tag to a default tag name";
+
+    private static final Logger logger = LogsCenter.getLogger(RenameTagCommand.class);
 
     private final String originalTagName;
     private final String newTagName;
@@ -62,8 +67,12 @@ public class RenameTagCommand extends Command {
 
         UserTag toRename = (UserTag) targetTag;
 
+        logger.info("Found " + toRename + " in active study plan");
+
         if (model.activeSpContainsModuleTag(newTagName)) {
             Tag replacement = model.getModuleTagFromActiveSp(newTagName);
+            logger.info("Found " + replacement + " in active study plan. Replacing "
+                    + toRename + " with " + replacement);
             if (replacement.isDefault()) {
                 throw new CommandException(MESSAGE_INVALID_TAG_NAME);
             }
